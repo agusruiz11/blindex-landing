@@ -2,16 +2,15 @@
   "permissions": {
     "allow": [
       "Bash(git status *)",
-      "Bash(powershell -NoProfile -Command \"Get-CimInstance Win32_Process -Filter \\\\\"Name='git.exe'\\\\\" | Select-Object ProcessId, CommandLine | Format-List\")",
-      "Bash(powershell -NoProfile -Command \"Get-CimInstance Win32_Process -Filter \\\\\"ProcessId=580\\\\\" | Select-Object ProcessId, CommandLine, ParentProcessId | Format-List\")",
-      "Bash(powershell -NoProfile -Command \"Get-CimInstance Win32_Process -Filter \\\\\"Name='git.exe'\\\\\" | Select-Object ProcessId, CommandLine, ParentProcessId | Format-List\")",
-      "Bash(git reset *)",
-      "Bash(rm -rf \"C:\\\\Users\\\\agusr/.git\")",
-      "Read(//c/Users/agusr/**)",
-      "Bash(git init *)",
-      "Bash(git remote *)",
-      "Bash(git fetch *)",
-      "Bash(git checkout *)"
+      "Bash(git diff *)",
+      "Bash(git log *)",
+      "Bash(git show *)",
+      "Bash(git check-ignore *)",
+      "Bash(npm run *)",
+      "Bash(npx tsc *)",
+      "Bash(ffprobe *)",
+      "Bash(pdftotext *)",
+      "Bash(pdftocairo *)"
     ]
   }
 }

@@ -2,16 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ── TOKENS DE MARCA — PLACEHOLDER ──
-   Reemplazar estos valores (junto con tailwind.config.ts) cuando llegue
-   el manual de marca real de Blindex. */
+/* ── TOKENS DE MARCA — BLINDEX ──
+   Espejo de tailwind.config.ts, para lo que no se puede resolver con
+   utilities. Si cambia uno, cambiar el otro.
+   Valores OFICIALES del manual de marca. Ver docs/manual-de-marca.md */
 :root {
-  --brand-50: #eaf1fb;
-  --brand-500: #1c5cb8;
-  --brand-700: #0f3670;
-  --accent-500: #e8951a;
-  --ink: #0b1420;
-  --paper: #f6f8fb;
+  --brand-500: #e12726; /* rojo Blindex oficial */
+  --brand-600: #cd2322;
+  --ink-50: #f7f7f7;
+  --ink-500: #7a7a7a;
+  --ink-700: #404040;
+  --ink: #262626;
+  --paper: #f7f7f7;
 }
 
 html {
@@ -33,16 +35,16 @@ section[id] {
 }
 
 body {
-  font-family: var(--font-inter), system-ui, sans-serif;
+  font-family: var(--font-source-sans), system-ui, sans-serif;
 }
 
 ::selection {
-  background: rgba(28, 92, 184, 0.25);
+  background: rgba(225, 39, 38, 0.22);
   color: var(--ink);
 }
 
 :where(a, button, input, select, textarea):focus-visible {
-  outline: 2px solid var(--accent-500);
+  outline: 2px solid var(--brand-500);
   outline-offset: 2px;
   border-radius: 6px;
 }
@@ -65,12 +67,16 @@ body {
            focus:outline-none;
   }
 
+  /* Acción principal: rojo Blindex. Es el único lugar donde el rojo ocupa
+     superficie sólida, y por eso funciona — si el rojo estuviera en todos
+     lados, el CTA no se distinguiría de nada. */
   .btn-primary {
-    @apply btn bg-brand-500 text-white hover:bg-brand-600 shadow-lg shadow-brand-500/20 hover:shadow-xl hover:-translate-y-0.5;
+    @apply btn bg-brand-500 text-white hover:bg-brand-600 shadow-lg shadow-brand-500/25 hover:shadow-xl hover:-translate-y-0.5;
   }
 
+  /* Acción secundaria sobre fondo claro: grafito. */
   .btn-accent {
-    @apply btn bg-accent-500 text-white hover:bg-accent-600 shadow-lg shadow-accent-500/20 hover:shadow-xl hover:-translate-y-0.5;
+    @apply btn bg-ink-900 text-white hover:bg-ink-800 shadow-lg shadow-ink-900/20 hover:shadow-xl hover:-translate-y-0.5;
   }
 
   .btn-ghost {
@@ -78,11 +84,11 @@ body {
   }
 
   .btn-outline {
-    @apply btn border border-brand-500/30 text-brand-700 hover:bg-brand-50;
+    @apply btn border border-ink-500/30 text-ink-700 hover:bg-ink-50;
   }
 
   .chip {
-    @apply inline-flex items-center gap-1.5 rounded-full border border-brand-500/20 bg-brand-50 px-3 py-1 text-xs font-medium text-brand-700;
+    @apply inline-flex items-center gap-1.5 rounded-full border border-ink-500/20 bg-ink-50 px-3 py-1 text-xs font-medium text-ink-700;
   }
 
   .section {
@@ -105,7 +111,7 @@ body {
            opacity-0 transition-opacity duration-500 pointer-events-none;
   }
   .glass-card:hover {
-    @apply -translate-y-1 shadow-2xl shadow-brand-500/10;
+    @apply -translate-y-1 shadow-2xl shadow-ink-500/10;
   }
   .glass-card:hover::before {
     animation: shimmer 1.1s ease-out;
@@ -133,13 +139,13 @@ body {
 
 /* Leaflet fixes */
 .leaflet-container {
-  font-family: var(--font-inter), system-ui, sans-serif;
-  background: #eef2f7;
+  font-family: var(--font-source-sans), system-ui, sans-serif;
+  background: #eceded;
 }
 .leaflet-popup-content-wrapper {
   border-radius: 14px;
   padding: 4px 6px;
-  box-shadow: 0 10px 30px -10px rgba(6, 26, 56, 0.3);
+  box-shadow: 0 10px 30px -10px rgba(38, 38, 38, 0.3);
 }
 .leaflet-popup-content {
   margin: 10px 12px;

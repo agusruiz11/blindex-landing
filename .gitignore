@@ -28,3 +28,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# material original del cliente (originales pesados: .ai, PDF de imprenta,
+# JPG en alta, videos). NO se versiona ni se deploya: de acá salen los
+# derivados optimizados que sí van a public/. Backup en el Drive del proyecto.
+/assets-fuente

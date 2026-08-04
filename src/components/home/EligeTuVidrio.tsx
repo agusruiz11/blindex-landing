@@ -6,9 +6,9 @@ export default function EligeTuVidrio() {
     <section id="elegi-tu-vidrio" className="section">
       <div className="container-x">
         <Reveal>
-          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-brand-600 to-brand-800 px-8 py-14 text-white sm:px-14 sm:py-16">
+          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-ink-600 to-ink-800 px-8 py-14 text-white sm:px-14 sm:py-16">
             <div className="pointer-events-none absolute -right-16 -top-16 h-72 w-72 rounded-full bg-white/10 blur-3xl" />
-            <div className="pointer-events-none absolute -bottom-20 left-1/3 h-64 w-64 rounded-full bg-accent-500/20 blur-3xl" />
+            <div className="pointer-events-none absolute -bottom-20 left-1/3 h-64 w-64 rounded-full bg-brand-500/20 blur-3xl" />
 
             <div className="relative flex flex-col items-start gap-6 lg:flex-row lg:items-center lg:justify-between">
               <div className="max-w-xl">

@@ -25,14 +25,14 @@ const brandPin = (active: boolean) =>
       <div style="
         transform: translate(-50%, -100%);
         position: relative;
-        filter: drop-shadow(0 6px 10px rgba(6,20,32,0.35));
+        filter: drop-shadow(0 6px 10px rgba(18,21,26,0.35));
       ">
         <svg width="36" height="46" viewBox="0 0 36 46" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M18 45c9-12 15-19 15-27a15 15 0 1 0-30 0c0 8 6 15 15 27z"
-                fill="${active ? "#E8951A" : "#1C5CB8"}"
+                fill="${active ? "#ED1C24" : "#474D57"}"
                 stroke="white" stroke-width="2"/>
           <circle cx="18" cy="18" r="6.5" fill="white"/>
-          <circle cx="18" cy="18" r="3" fill="${active ? "#1C5CB8" : "#E8951A"}"/>
+          <circle cx="18" cy="18" r="3" fill="${active ? "#ED1C24" : "#474D57"}"/>
         </svg>
       </div>
     `,
@@ -132,25 +132,34 @@ export default function MapaPuntos({ puntos, selectedId, onSelect }: Props) {
         >
           <Popup>
             <div className="min-w-[180px]">
-              <div className="font-semibold text-[15px] text-[#0B1420]">
+              <div className="font-semibold text-[15px] text-[#12151A]">
                 {p.nombre}
               </div>
-              <div className="mt-1 text-[13px] text-[#0B1420]/70">
+              <div className="mt-1 text-[13px] text-[#12151A]/70">
                 {p.direccion}
                 <br />
                 {p.localidad} · {p.provincia}
               </div>
-              <a
-                href={`https://wa.me/${p.whatsapp}?text=${encodeURIComponent(
-                  "Hola, los contacto desde la web de Blindex"
-                )}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => trackWhatsAppClick(p.id)}
-                className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-[#25D366] px-3 py-1.5 text-xs font-semibold text-white"
-              >
-                WhatsApp
-              </a>
+              {p.whatsapp ? (
+                <a
+                  href={`https://wa.me/${p.whatsapp}?text=${encodeURIComponent(
+                    "Hola, los contacto desde la web de Blindex"
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => trackWhatsAppClick(p.id)}
+                  className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-[#25D366] px-3 py-1.5 text-xs font-semibold text-white"
+                >
+                  WhatsApp
+                </a>
+              ) : p.telefono ? (
+                <a
+                  href={`tel:${p.telefono.replace(/[\s()]/g, "")}`}
+                  className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-[#12151A] px-3 py-1.5 text-xs font-semibold text-white"
+                >
+                  {p.telefono}
+                </a>
+              ) : null}
             </div>
           </Popup>
         </Marker>

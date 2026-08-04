@@ -10,7 +10,7 @@ import CardPunto from "./CardPunto";
 const MapaPuntos = dynamic(() => import("./MapaPuntos"), {
   ssr: false,
   loading: () => (
-    <div className="grid h-full min-h-[400px] place-items-center rounded-2xl bg-brand-50 text-sm text-brand-700">
+    <div className="grid h-full min-h-[400px] place-items-center rounded-2xl bg-ink-50 text-sm text-ink-700">
       Cargando mapa…
     </div>
   ),
@@ -76,7 +76,7 @@ export default function PuntosClient() {
             <button
               onClick={() => setMobileView("lista")}
               className={`inline-flex items-center gap-1.5 rounded-full px-4 py-2 transition ${
-                mobileView === "lista" ? "bg-brand-500 text-white" : "text-ink/70"
+                mobileView === "lista" ? "bg-ink-500 text-white" : "text-ink/70"
               }`}
             >
               <List className="h-4 w-4" /> Lista
@@ -84,7 +84,7 @@ export default function PuntosClient() {
             <button
               onClick={() => setMobileView("mapa")}
               className={`inline-flex items-center gap-1.5 rounded-full px-4 py-2 transition ${
-                mobileView === "mapa" ? "bg-brand-500 text-white" : "text-ink/70"
+                mobileView === "mapa" ? "bg-ink-500 text-white" : "text-ink/70"
               }`}
             >
               <MapIcon className="h-4 w-4" /> Mapa
@@ -105,14 +105,14 @@ export default function PuntosClient() {
                     placeholder="Buscar por nombre, localidad o dirección…"
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
-                    className="w-full rounded-full border border-slate-200 bg-white pl-10 pr-4 py-2.5 text-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20"
+                    className="w-full rounded-full border border-slate-200 bg-white pl-10 pr-4 py-2.5 text-sm outline-none focus:border-ink-500 focus:ring-2 focus:ring-ink-500/20"
                     aria-label="Buscar punto de venta"
                   />
                 </div>
                 <select
                   value={provincia}
                   onChange={(e) => setProvincia(e.target.value)}
-                  className="rounded-full border border-slate-200 bg-white px-4 py-2.5 text-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20"
+                  className="rounded-full border border-slate-200 bg-white px-4 py-2.5 text-sm outline-none focus:border-ink-500 focus:ring-2 focus:ring-ink-500/20"
                   aria-label="Filtrar por provincia"
                 >
                   <option value="todas">Todas las provincias</option>
@@ -130,8 +130,8 @@ export default function PuntosClient() {
                   aria-pressed={soloSelect}
                   className={`inline-flex items-center gap-1 rounded-full border px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide transition ${
                     soloSelect
-                      ? "border-accent-500/40 bg-accent-500 text-white shadow-sm shadow-accent-500/20"
-                      : "border-accent-500/30 bg-accent-500/10 text-accent-600 hover:bg-accent-500/20"
+                      ? "border-brand-500/40 bg-brand-500 text-white shadow-sm shadow-brand-500/20"
+                      : "border-brand-500/30 bg-brand-500/10 text-brand-600 hover:bg-brand-500/20"
                   }`}
                 >
                   <ShieldCheck className="h-3 w-3" />

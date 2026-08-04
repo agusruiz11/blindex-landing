@@ -23,7 +23,7 @@ export default function ModuloVideo({
         </div>
         <div className="p-6">
           <div className="flex items-start gap-3">
-            <PlayCircle className="mt-0.5 h-5 w-5 shrink-0 text-brand-500" />
+            <PlayCircle className="mt-0.5 h-5 w-5 shrink-0 text-ink-500" />
             <div>
               <h3 className="h-display text-lg text-ink">{modulo.titulo}</h3>
               <p className="mt-1.5 text-sm leading-relaxed text-ink/65">

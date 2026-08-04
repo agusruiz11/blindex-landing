@@ -29,13 +29,13 @@ export default function Autenticidad() {
   return (
     <section id="autenticidad" className="section relative overflow-hidden bg-ink text-white">
       <div className="absolute inset-0 bg-grid-soft opacity-20" />
-      <div className="absolute -right-24 -top-24 h-96 w-96 rounded-full bg-accent-500/20 blur-3xl" />
+      <div className="absolute -right-24 -top-24 h-96 w-96 rounded-full bg-brand-500/20 blur-3xl" />
 
       <div className="container-x relative">
         <div className="grid gap-12 lg:grid-cols-[1.1fr_1fr] items-center">
           <div>
             <Reveal>
-              <span className="chip border-accent-500/30 bg-accent-500/10 text-accent-400">
+              <span className="chip border-brand-500/30 bg-brand-500/10 text-brand-400">
                 <ShieldAlert className="h-3.5 w-3.5" />
                 Exigí Blindex original
               </span>

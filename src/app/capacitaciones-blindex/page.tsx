@@ -30,7 +30,7 @@ export default function CapacitacionesPage() {
             módulos, completá el formulario y la marca revisará tu
             inscripción para emitir tu certificado.
           </p>
-          <div className="mt-4 inline-flex items-center gap-2 rounded-xl bg-brand-50 px-4 py-2.5 text-sm text-brand-700">
+          <div className="mt-4 inline-flex items-center gap-2 rounded-xl bg-ink-50 px-4 py-2.5 text-sm text-ink-700">
             <Award className="h-4 w-4" />
             Al finalizar y ser aprobado, recibís el certificado Blindex.
           </div>

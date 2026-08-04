@@ -125,7 +125,7 @@ export default function FormularioInscripcion() {
               type="text"
               value={datos.nombre}
               onChange={set("nombre")}
-              className="w-full rounded-lg border border-slate-200 px-3.5 py-2.5 outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20"
+              className="w-full rounded-lg border border-slate-200 px-3.5 py-2.5 outline-none focus:border-ink-500 focus:ring-2 focus:ring-ink-500/20"
               placeholder="Juan Pérez"
             />
           </label>
@@ -135,7 +135,7 @@ export default function FormularioInscripcion() {
               type="email"
               value={datos.email}
               onChange={set("email")}
-              className="w-full rounded-lg border border-slate-200 px-3.5 py-2.5 outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20"
+              className="w-full rounded-lg border border-slate-200 px-3.5 py-2.5 outline-none focus:border-ink-500 focus:ring-2 focus:ring-ink-500/20"
               placeholder="juan@vidrieria.com"
             />
           </label>
@@ -145,7 +145,7 @@ export default function FormularioInscripcion() {
               type="tel"
               value={datos.telefono}
               onChange={set("telefono")}
-              className="w-full rounded-lg border border-slate-200 px-3.5 py-2.5 outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20"
+              className="w-full rounded-lg border border-slate-200 px-3.5 py-2.5 outline-none focus:border-ink-500 focus:ring-2 focus:ring-ink-500/20"
               placeholder="+54 11 4000-0000"
             />
           </label>
@@ -155,7 +155,7 @@ export default function FormularioInscripcion() {
               type="text"
               value={datos.empresa}
               onChange={set("empresa")}
-              className="w-full rounded-lg border border-slate-200 px-3.5 py-2.5 outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20"
+              className="w-full rounded-lg border border-slate-200 px-3.5 py-2.5 outline-none focus:border-ink-500 focus:ring-2 focus:ring-ink-500/20"
               placeholder="Vidriería Pérez"
             />
           </label>
@@ -165,7 +165,7 @@ export default function FormularioInscripcion() {
               type="text"
               value={datos.localidad}
               onChange={set("localidad")}
-              className="w-full rounded-lg border border-slate-200 px-3.5 py-2.5 outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20"
+              className="w-full rounded-lg border border-slate-200 px-3.5 py-2.5 outline-none focus:border-ink-500 focus:ring-2 focus:ring-ink-500/20"
               placeholder="Rosario"
             />
           </label>
@@ -175,7 +175,7 @@ export default function FormularioInscripcion() {
               type="text"
               value={datos.provincia}
               onChange={set("provincia")}
-              className="w-full rounded-lg border border-slate-200 px-3.5 py-2.5 outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20"
+              className="w-full rounded-lg border border-slate-200 px-3.5 py-2.5 outline-none focus:border-ink-500 focus:ring-2 focus:ring-ink-500/20"
               placeholder="Santa Fe"
             />
           </label>
@@ -194,8 +194,8 @@ export default function FormularioInscripcion() {
                     key={op}
                     className={`flex cursor-pointer items-center gap-2 rounded-lg border px-3.5 py-2.5 text-sm transition ${
                       datos.respuestas[p.id] === op
-                        ? "border-brand-500 bg-brand-50 text-brand-700"
-                        : "border-slate-200 text-ink/75 hover:border-brand-200"
+                        ? "border-ink-500 bg-ink-50 text-ink-700"
+                        : "border-slate-200 text-ink/75 hover:border-ink-200"
                     }`}
                   >
                     <input

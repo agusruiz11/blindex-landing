@@ -49,7 +49,7 @@ export default function PorQueBlindex() {
               }}
               className="glass-card group rounded-2xl p-7"
             >
-              <div className="grid h-12 w-12 place-items-center rounded-xl bg-brand-50 text-brand-600 transition group-hover:bg-brand-500 group-hover:text-white">
+              <div className="grid h-12 w-12 place-items-center rounded-xl bg-ink-50 text-ink-600 transition group-hover:bg-ink-500 group-hover:text-white">
                 <Icon className="h-6 w-6" />
               </div>
               <h3 className="h-display mt-5 text-xl text-ink">{title}</h3>

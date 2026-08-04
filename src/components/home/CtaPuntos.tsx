@@ -9,7 +9,7 @@ export default function CtaPuntos() {
         <Reveal>
           <div className="flex flex-col items-start gap-6 rounded-3xl border border-slate-200 bg-white p-8 shadow-sm sm:flex-row sm:items-center sm:justify-between sm:p-10">
             <div className="flex items-start gap-4">
-              <div className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-brand-500 text-white shadow-lg shadow-brand-500/25">
+              <div className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-ink-500 text-white shadow-lg shadow-ink-500/25">
                 <MapPin className="h-6 w-6" />
               </div>
               <div>

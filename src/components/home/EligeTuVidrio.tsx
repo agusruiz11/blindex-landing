@@ -26,7 +26,15 @@ export default function EligeTuVidrio() {
                 </p>
               </div>
 
-              <a href="#" className="btn-accent shrink-0 whitespace-nowrap">
+              {/* La herramienta es una app estática aparte (Bootstrap + jQuery)
+                  que hoy vive en el WordPress. Este link SE ROMPE cuando se
+                  migre el dominio: hay que copiar la carpeta a
+                  /public/elegituvidrio manteniendo la misma URL.
+                  Ver docs/elegi-tu-vidrio.md */}
+              <a
+                href="/elegituvidrio/"
+                className="btn-primary shrink-0 whitespace-nowrap"
+              >
                 Elegí tu vidrio
                 <ArrowRight className="h-4 w-4" />
               </a>

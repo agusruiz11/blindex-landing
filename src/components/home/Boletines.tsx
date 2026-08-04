@@ -1,18 +1,10 @@
 "use client";
 
-import { FileText, Download } from "lucide-react";
+import Link from "next/link";
+import { FileText, Download, ArrowRight } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import Reveal, { RevealStagger } from "@/components/Reveal";
-
-// PLACEHOLDER — reemplazar por los boletines/folletos reales (PDF)
-const boletines = [
-  { title: "Folleto institucional Blindex", meta: "PDF · 2.1 MB" },
-  { title: "Boletín técnico — Vidrio templado", meta: "PDF · 850 KB" },
-  { title: "Boletín técnico — Vidrio laminado", meta: "PDF · 920 KB" },
-  { title: "Guía DVH — Norma IRAM 12598-1", meta: "PDF · 1.4 MB" },
-  { title: "Ficha técnica — Control solar", meta: "PDF · 780 KB" },
-  { title: "Manual de instalación para vidrieros", meta: "PDF · 3.2 MB" },
-];
+import { boletines } from "@/data/boletines";
 
 export default function Boletines() {
   const reduce = useReducedMotion();
@@ -25,12 +17,19 @@ export default function Boletines() {
           <h2 className="h-display mt-4 max-w-2xl text-3xl sm:text-4xl">
             Boletines técnicos y material de marca.
           </h2>
+          <p className="mt-4 max-w-2xl text-ink/60">
+            Documentación para especificar vidrio de seguridad con criterio.
+            Descargable y lista para adjuntar a tu pliego.
+          </p>
         </Reveal>
 
         <RevealStagger className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {boletines.map((b) => (
-            <motion.div
-              key={b.title}
+            <motion.a
+              key={b.id}
+              href={b.pdf}
+              target="_blank"
+              rel="noopener noreferrer"
               variants={{
                 hidden: { opacity: 0, y: reduce ? 0 : 18 },
                 show: {
@@ -41,23 +40,31 @@ export default function Boletines() {
               }}
               className="glass-card flex items-center gap-4 rounded-2xl border-slate-200 p-5"
             >
-              <div className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-brand-50 text-brand-600">
+              <div className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-ink-50 text-ink-600">
                 <FileText className="h-5 w-5" />
               </div>
               <div className="min-w-0 flex-1">
-                <div className="truncate font-semibold text-ink">{b.title}</div>
-                <div className="text-xs text-ink/50">{b.meta}</div>
+                <div className="font-semibold leading-snug text-ink">{b.titulo}</div>
+                <div className="mt-0.5 text-xs text-ink/50">PDF</div>
               </div>
-              <a
-                href="#"
-                aria-label={`Descargar ${b.title}`}
-                className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-brand-500/25 text-brand-600 transition hover:bg-brand-500 hover:text-white"
+              <span
+                aria-hidden
+                className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-brand-500/25 text-brand-600 transition group-hover:bg-brand-500 group-hover:text-white"
               >
                 <Download className="h-4 w-4" />
-              </a>
-            </motion.div>
+              </span>
+            </motion.a>
           ))}
         </RevealStagger>
+
+        <Reveal>
+          <div className="mt-10">
+            <Link href="/asesoramiento" className="btn-outline">
+              Ver todo el asesoramiento técnico
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+        </Reveal>
       </div>
     </section>
   );

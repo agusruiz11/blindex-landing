@@ -2,31 +2,31 @@ import Link from "next/link";
 import BlindexLogo from "@/components/BlindexLogo";
 import { socials } from "@/data/socials";
 import { paises } from "@/data/paises";
+import { productos } from "@/data/productos";
 
 const nav = [
   {
-    title: "Producto",
-    items: [
-      { label: "Vidrio templado", href: "/#productos" },
-      { label: "Vidrio laminado", href: "/#productos" },
-      { label: "DVH", href: "/#productos" },
-      { label: "Control solar", href: "/#productos" },
-    ],
+    title: "Líneas de producto",
+    items: productos.map((p) => ({
+      label: p.nombre,
+      href: `/productos/${p.id}`,
+    })),
   },
   {
     title: "Blindex",
     items: [
       { label: "¿Por qué Blindex?", href: "/#por-que-blindex" },
       { label: "Exigí Blindex original", href: "/#autenticidad" },
-      { label: "Vidriería Argentina S.A.", href: "#" },
-      { label: "Prensa", href: "#" },
+      { label: "Nuestras obras", href: "/nuestras-obras" },
+      { label: "Contacto", href: "/contacto" },
     ],
   },
   {
     title: "Recursos",
     items: [
       { label: "Elegí tu vidrio", href: "/#elegi-tu-vidrio" },
-      { label: "Boletines técnicos", href: "/#boletines" },
+      { label: "Asesoramiento técnico", href: "/asesoramiento" },
+      { label: "Capacitación online", href: "/capacitacion-online" },
       { label: "Puntos de venta", href: "/puntos-de-venta" },
     ],
   },
@@ -39,7 +39,7 @@ export default function Footer() {
         <div className="grid gap-10 md:grid-cols-4">
           <div>
             <Link href="/" aria-label="Blindex — inicio" className="inline-flex">
-              <BlindexLogo light />
+              <BlindexLogo light className="h-12 w-auto sm:h-14" />
             </Link>
             <p className="mt-4 max-w-xs text-sm text-white/60">
               Vidrio de seguridad con la trayectoria y el respaldo que
@@ -65,7 +65,7 @@ export default function Footer() {
 
           {nav.map((col) => (
             <div key={col.title}>
-              <div className="text-xs font-semibold uppercase tracking-wider text-brand-300">
+              <div className="text-xs font-semibold uppercase tracking-wider text-ink-300">
                 {col.title}
               </div>
               <ul className="mt-4 space-y-2.5 text-sm text-white/65">

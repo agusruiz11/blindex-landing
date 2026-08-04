@@ -7,12 +7,15 @@ import { Menu, X, MapPin } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import BlindexLogo from "@/components/BlindexLogo";
 
+// El sitio actual expone sólo 4 páginas de 91 en el menú: Obras, Asesoramiento
+// y Contacto están publicadas pero son inalcanzables navegando. Sacarlas a la
+// superficie es el objetivo central del refresh.
 const links = [
   { href: "/#productos", label: "Productos" },
-  { href: "/#por-que-blindex", label: "¿Por qué Blindex?" },
+  { href: "/nuestras-obras", label: "Obras" },
   { href: "/#elegi-tu-vidrio", label: "Elegí tu vidrio" },
-  { href: "/#boletines", label: "Boletines" },
-  { href: "/puntos-de-venta", label: "Puntos de venta" },
+  { href: "/asesoramiento", label: "Asesoramiento" },
+  { href: "/contacto", label: "Contacto" },
 ];
 
 export default function Navbar() {
@@ -50,7 +53,7 @@ export default function Navbar() {
               key={l.href}
               href={l.href}
               className={`whitespace-nowrap text-sm font-medium transition ${
-                solid ? "text-ink/80 hover:text-brand-600" : "text-white/85 hover:text-white"
+                solid ? "text-ink/80 hover:text-ink-600" : "text-white/85 hover:text-white"
               }`}
             >
               {l.label}
@@ -88,7 +91,7 @@ export default function Navbar() {
                   key={l.href}
                   href={l.href}
                   onClick={() => setOpen(false)}
-                  className="rounded-lg px-3 py-3 text-sm font-medium text-ink/90 hover:bg-brand-50"
+                  className="rounded-lg px-3 py-3 text-sm font-medium text-ink/90 hover:bg-ink-50"
                 >
                   {l.label}
                 </Link>

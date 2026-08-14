@@ -86,17 +86,26 @@ export default function Footer() {
             <span className="mr-2 text-xs font-semibold uppercase tracking-wider text-white/50">
               Blindex en la región
             </span>
-            {paises.map((p) => (
-              <a
-                key={p.nombre}
-                href={p.href}
-                aria-label={p.nombre}
-                title={p.nombre}
-                className="grid h-9 w-9 place-items-center rounded-full text-lg ring-1 ring-white/15 transition hover:ring-white/40 hover:bg-white/10"
-              >
-                <span aria-hidden>{p.bandera}</span>
-              </a>
-            ))}
+            {paises.map((p) => {
+              // Los sitios de Bolivia, Paraguay y Uruguay son dominios aparte:
+              // abren en pestaña nueva. Argentina es este mismo sitio.
+              const externo = p.href.startsWith("http");
+              return (
+                <a
+                  key={p.nombre}
+                  href={p.href}
+                  aria-label={
+                    externo ? `Blindex ${p.nombre} (sitio externo)` : p.nombre
+                  }
+                  title={p.nombre}
+                  target={externo ? "_blank" : undefined}
+                  rel={externo ? "noopener noreferrer" : undefined}
+                  className="grid h-9 w-9 place-items-center rounded-full text-lg ring-1 ring-white/15 transition hover:ring-white/40 hover:bg-white/10"
+                >
+                  <span aria-hidden>{p.bandera}</span>
+                </a>
+              );
+            })}
           </div>
         </div>
 

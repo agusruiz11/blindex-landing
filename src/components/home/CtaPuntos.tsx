@@ -4,7 +4,14 @@ import Reveal from "@/components/Reveal";
 
 export default function CtaPuntos() {
   return (
-    <section className="section pt-0">
+    // El corte seco gris→blanco caía justo en el borde superior de la card y
+    // la partía al medio. Con el degradé la sección arranca en el mismo gris
+    // con el que termina Boletines —no hay línea— y se apaga a blanco hacia
+    // abajo, que es donde el footer necesita el blanco. La card sigue siendo
+    // blanca sobre gris, que es lo que la hace leer como card.
+    // El pb va recortado: con el padding completo de `section` más el margen
+    // del footer quedaban 200px de blanco muerto entre la card y el footer.
+    <section className="section bg-gradient-to-b from-paper via-paper to-white pt-0 pb-12 sm:pb-16">
       <div className="container-x">
         <Reveal>
           <div className="flex flex-col items-start gap-6 rounded-3xl border border-slate-200 bg-white p-8 shadow-sm sm:flex-row sm:items-center sm:justify-between sm:p-10">

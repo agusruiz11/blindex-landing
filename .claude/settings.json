@@ -10,7 +10,30 @@
       "Bash(npx tsc *)",
       "Bash(ffprobe *)",
       "Bash(pdftotext *)",
-      "Bash(pdftocairo *)"
+      "Bash(pdftocairo *)",
+      "Read(//home/elmapache/.claude/projects/**)",
+      "Read(//home/elmapache/.claude/**)",
+      "Read(//home/elmapache/.claude/pinned-archive/**)",
+      "Bash(ls -la /home/elmapache/.claude/projects/-home-elmapache-Documents-Posicionarte-blindex-landing/ | head -30)",
+      "Read(//home/elmapache/.claude/projects/-home-elmapache-Documents-Posicionarte-blindex-landing/**)",
+      "Bash(ls /home/elmapache/.claude/projects/-home-elmapache-Documents-Posicionarte-blindex-landing/memory/)",
+      "Read(//home/elmapache/.claude/projects/-home-elmapache-Documents-Posicionarte-blindex-landing/memory/**)",
+      "Bash(cd /home/elmapache/.claude/projects/-home-elmapache-Documents-Posicionarte-blindex-landing/memory && head -100 MEMORY.md *.md)",
+      "Bash(python3 -)",
+      "Bash(OLD=/home/elmapache/.claude/projects/-home-elmapache-Documents-Posicionarte-blindex-landing *)",
+      "Read(//home/elmapache/.claude/bin/**)",
+      "Read(//home/elmapache/.claude/skills/**)",
+      "Bash(grep -nE 'pinned-sessions|pinned-archive|projects/|cp |rsync' /home/elmapache/.claude/bin/claude-pin | head -25)",
+      "Bash(S=/tmp/claude-1000/-home-elmapache-Documents-1-Posicionarte-blindex-landing/8fc8fbd4-f4f9-4c05-b319-8c8d740a05f1/scratchpad/home.html; grep -o 'empresas distribuyen Blindex' $S; echo \"--- chrome ---\"; ls ~/.claude/chrome/ 2>/dev/null | head -3; which google-chrome chromium chromium-browser 2>/dev/null; ls ~/.cache/ms-playwright 2>/dev/null | head -3)",
+      "Read(//home/elmapache/.claude/chrome/**)",
+      "Read(//home/elmapache/.cache/**)",
+      "Bash(google-chrome --headless=new --disable-gpu --hide-scrollbars --window-size=1440,950 --virtual-time-budget=6000 --screenshot=red.png \"http://localhost:3117/#red-distribuidores\")",
+      "Bash(python3 -c \"import PIL; print\\('pil ok'\\)\")",
+      "Bash(google-chrome --headless=new --disable-gpu --hide-scrollbars --window-size=1440,9000 --virtual-time-budget=9000 --screenshot=full.png \"http://localhost:3117/\")",
+      "Bash(python3 -c ' *)",
+      "Bash(npm i *)",
+      "Bash(node shot.mjs 1440 seccion-desktop.png)",
+      "Bash(node shot.mjs 390 seccion-mobile.png)"
     ]
   }
 }

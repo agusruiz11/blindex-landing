@@ -3,6 +3,7 @@ import PorQueBlindex from "@/components/home/PorQueBlindex";
 import Productos from "@/components/home/Productos";
 import Obras from "@/components/home/Obras";
 import Autenticidad from "@/components/home/Autenticidad";
+import RedDistribuidores from "@/components/home/RedDistribuidores";
 import EligeTuVidrio from "@/components/home/EligeTuVidrio";
 import Boletines from "@/components/home/Boletines";
 import CtaPuntos from "@/components/home/CtaPuntos";
@@ -18,6 +19,10 @@ export default function Home() {
           está enterrado fuera del menú. */}
       <Obras />
       <Autenticidad />
+      {/* Va pegada a Autenticidad a propósito: esa sección dice "exigí Blindex
+          original" y ésta contesta dónde conseguirlo. La red exclusiva ES la
+          prueba de autenticidad, no un listado más. */}
+      <RedDistribuidores />
       <EligeTuVidrio />
       <Boletines />
       <CtaPuntos />

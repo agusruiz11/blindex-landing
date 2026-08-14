@@ -23,6 +23,18 @@ Orden real de las secciones en [page.tsx](../src/app/page.tsx):
 | 6 | Boletines | `home/Boletines.tsx` | copy de ejemplo |
 | 7 | CTA a puntos de venta | `home/CtaPuntos.tsx` | ok |
 
+⚠️ Esta tabla quedó vieja: no lista `home/Obras.tsx` (entre Productos y
+Autenticidad) ni `home/RedDistribuidores.tsx` (entre Autenticidad y Elegí tu
+vidrio). El orden real está siempre en [page.tsx](../src/app/page.tsx).
+
+**Red de distribuidores exclusivos** (10/08/2026): franja de logos equivalente a
+la "Red Ekoglass" que pidió el cliente. Los 32 nombres ya están cargados en
+[distribuidoresExclusivos.ts](../src/data/distribuidoresExclusivos.ts); **faltan
+los logos y las webs**, que Manuel le pidió a la marca. Sin logo, cada ficha
+muestra el nombre como wordmark, así que la sección se puede mostrar igual. No
+confundir con los 116 puntos de venta: son dos redes distintas, sin un solo
+nombre en común.
+
 ### Puntos de venta (`/puntos-de-venta`)
 
 Funcionalmente terminada: mapa Leaflet, listado, toggle lista/mapa en mobile,

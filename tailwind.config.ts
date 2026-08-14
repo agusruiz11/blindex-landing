@@ -123,10 +123,18 @@ const config: Config = {
           "0%,100%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(-6px)" },
         },
+        // La pista de logos se renderiza DUPLICADA, así que correrla hasta
+        // -50% deja la copia exactamente donde arrancaba el original: el loop
+        // no tiene salto ni corte visible.
+        marquee: {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-50%)" },
+        },
       },
       animation: {
         shimmer: "shimmer 2.4s linear infinite",
         floaty: "floaty 6s ease-in-out infinite",
+        marquee: "marquee 60s linear infinite",
       },
     },
   },

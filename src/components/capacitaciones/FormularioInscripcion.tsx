@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { CheckCircle2, Send } from "lucide-react";
+import { CheckCircle2, Send, Loader2 } from "lucide-react";
 import Reveal from "@/components/Reveal";
 
 type Respuestas = Record<string, string>;
@@ -64,17 +64,53 @@ const initialData: DatosInscripcion = {
   respuestas: {},
 };
 
-// Única función de envío del formulario, stubbeada para la demo.
-// TODO: integrar → guardar en Supabase (tabla exportable) + enviar mail de
-// aviso a la marca (Resend). La emisión del certificado la hace la marca
-// manualmente, fuera de este flujo.
-function handleSubmit(datos: DatosInscripcion) {
-  console.log("[inscripcion-capacitacion]", datos);
+const ERROR_GENERICO =
+  "No pudimos enviar tu inscripción. Probá de nuevo en unos minutos.";
+
+// Envío a /api/inscripcion (Resend): la marca recibe por mail los datos y las
+// respuestas del cuestionario, y emite el certificado a mano, fuera de este
+// flujo. Las respuestas viajan con el texto de la pregunta como clave para
+// que el mail se lea sin tener que abrir el código.
+// Si más adelante hace falta una tabla exportable (Supabase o similar), se
+// suma en el route handler sin tocar este componente.
+async function enviarInscripcion(datos: DatosInscripcion, website: string) {
+  const respuestas = Object.fromEntries(
+    preguntas.map((p) => [p.texto, datos.respuestas[p.id] ?? ""])
+  );
+  const res = await fetch("/api/inscripcion", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ ...datos, respuestas, website }),
+  });
+  const json = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string };
+  if (!res.ok || !json.ok) throw new Error(json.error ?? ERROR_GENERICO);
 }
 
 export default function FormularioInscripcion() {
   const [datos, setDatos] = useState<DatosInscripcion>(initialData);
   const [enviado, setEnviado] = useState(false);
+  const [enviando, setEnviando] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  // Honeypot anti-spam: oculto para personas, los bots lo completan.
+  const [website, setWebsite] = useState("");
+
+  async function handleSubmit() {
+    if (!camposCompletos || enviando) return;
+    setEnviando(true);
+    setError(null);
+    try {
+      await enviarInscripcion(datos, website);
+      setEnviado(true);
+    } catch (e) {
+      setError(
+        e instanceof Error && e.message
+          ? e.message
+          : "No pudimos enviar tu inscripción. Revisá tu conexión e intentá de nuevo."
+      );
+    } finally {
+      setEnviando(false);
+    }
+  }
 
   const set = (campo: keyof Omit<DatosInscripcion, "respuestas">) => (
     e: React.ChangeEvent<HTMLInputElement>
@@ -98,7 +134,7 @@ export default function FormularioInscripcion() {
         <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-8 text-center">
           <CheckCircle2 className="mx-auto h-10 w-10 text-emerald-600" />
           <h3 className="h-display mt-4 text-xl text-ink">
-            ¡Recibimos tu inscripción!
+            Recibimos tu inscripción.
           </h3>
           <p className="mt-2 text-ink/70">
             La marca revisará tus datos y te contactará para emitir el
@@ -117,6 +153,17 @@ export default function FormularioInscripcion() {
           Completá tus datos y el cuestionario para avanzar en la
           certificación Blindex.
         </p>
+
+        <input
+          type="text"
+          name="website"
+          value={website}
+          onChange={(e) => setWebsite(e.target.value)}
+          tabIndex={-1}
+          autoComplete="off"
+          aria-hidden="true"
+          className="hidden"
+        />
 
         <div className="mt-6 grid gap-4 sm:grid-cols-2">
           <label className="block text-sm">
@@ -214,17 +261,24 @@ export default function FormularioInscripcion() {
           ))}
         </div>
 
+        {error && (
+          <p role="alert" className="mt-6 rounded-xl bg-red-50 px-4 py-3 text-sm text-red-700">
+            {error}
+          </p>
+        )}
+
         <button
           type="button"
-          disabled={!camposCompletos}
-          onClick={() => {
-            handleSubmit(datos);
-            setEnviado(true);
-          }}
+          disabled={!camposCompletos || enviando}
+          onClick={handleSubmit}
           className="btn-primary mt-8 w-full disabled:cursor-not-allowed disabled:opacity-40 sm:w-auto"
         >
-          <Send className="h-4 w-4" />
-          Enviar inscripción
+          {enviando ? (
+            <Loader2 className="h-4 w-4 animate-spin" />
+          ) : (
+            <Send className="h-4 w-4" />
+          )}
+          {enviando ? "Enviando…" : "Enviar inscripción"}
         </button>
       </div>
     </Reveal>

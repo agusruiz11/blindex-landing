@@ -26,13 +26,17 @@ export default function EligeTuVidrio() {
                 </p>
               </div>
 
-              {/* La herramienta es una app estática aparte (Bootstrap + jQuery)
-                  que hoy vive en el WordPress. Este link SE ROMPE cuando se
-                  migre el dominio: hay que copiar la carpeta a
-                  /public/elegituvidrio manteniendo la misma URL.
-                  Ver docs/elegi-tu-vidrio.md */}
+              {/* PROVISORIO (07/09/2026): la herramienta es una app estática
+                  aparte (Bootstrap + jQuery) que hoy vive en el WordPress.
+                  Mientras el sitio nuevo esté en el dominio de Vercel, el
+                  botón apunta al WordPress para que no dé 404. Este link SE
+                  ROMPE el día que se migre el dominio: antes de eso hay que
+                  copiar la carpeta a /public/elegituvidrio y volver a
+                  href="/elegituvidrio/". Ver docs/elegi-tu-vidrio.md */}
               <a
-                href="/elegituvidrio/"
+                href="https://www.blindex.com.ar/elegituvidrio/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="btn-primary shrink-0 whitespace-nowrap"
               >
                 Elegí tu vidrio

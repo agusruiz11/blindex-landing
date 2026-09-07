@@ -14,15 +14,17 @@ export default function Home() {
       <Hero />
       <PorQueBlindex />
       <Productos />
-      {/* Obras va acá a propósito: después de mostrar QUÉ vende la marca, la
-          prueba de que funciona. Es el activo más fuerte y en el sitio actual
-          está enterrado fuera del menú. */}
-      <Obras />
+      {/* Orden pedido por el cliente (mail del 04/09/2026): "Exigí Blindex
+          original" va antes que "Nuestras obras". Después de mostrar QUÉ vende
+          la marca, primero el mensaje de autenticidad y recién después la
+          prueba de que funciona. */}
       <Autenticidad />
       {/* Va pegada a Autenticidad a propósito: esa sección dice "exigí Blindex
-          original" y ésta contesta dónde conseguirlo. La red exclusiva ES la
-          prueba de autenticidad, no un listado más. */}
+          original" y ésta contesta dónde conseguirlo: la red exclusiva es la
+          prueba concreta de autenticidad. Si se vuelve a mover Autenticidad,
+          esta sección se mueve con ella. */}
       <RedDistribuidores />
+      <Obras />
       <EligeTuVidrio />
       <Boletines />
       <CtaPuntos />

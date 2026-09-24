@@ -1,0 +1,161 @@
+/*
+ * Globals
+ */
+
+/* Links */
+a,
+a:focus,
+a:hover {
+  color: #fff;
+  cursor: pointer;
+}
+
+a i {
+  color: #e12a27;
+  margin: 10px;
+}
+
+/* Custom default button */
+.btn-secondary,
+.btn-secondary:hover,
+.btn-secondary:focus {
+  color: #333;
+  text-shadow: none; /* Prevent inheritance from `body` */
+  background-color: #fff;
+  border: .05rem solid #fff;
+  font-weight: 300;
+}
+
+
+
+/*
+ * Base structure
+ */
+
+html,
+body {
+  font-family: 'Lato', sans-serif;
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+
+}
+html { font-size: calc(0.5em + 1vw); font-weight: 300; }
+
+body {
+  height: 100%;
+  display: flex;
+  color: #fff;
+  background: #f55253;
+}
+
+.left-layer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: auto;
+  left: -100%;
+  bottom: auto;
+  right: auto;
+  background: #494949;
+  transition: all 0.7s cubic-bezier(0.645, 0.045, 0.355, 1);
+  z-index: 1; 
+}
+.left-layer.active {
+  left: 100%;
+  z-index: 1; 
+}
+.left-layer--2 {
+  background: #e12a27;
+  transition-delay: 0.3s;
+  z-index: 1; 
+}
+.left-layer--3 {
+  background: #3d3e42;
+  transition-delay: 0.12s;
+  z-index: 1; 
+}
+.left-layer--4 {
+  background: #f45353;
+  transition-delay: 0.08s;
+  z-index: 1; 
+}
+
+body.ficha .boton_catalogo a.btn {
+   -webkit-transition: all 0.5s ease-in-out;
+     border-radius: 0px;
+    padding: 5px 20px;
+    font-size: 90%;
+    color: #333;
+    text-shadow: none; /* Prevent inheritance from `body` */
+    background-color: #fff;
+    border: .05rem solid #ccc;
+    font-weight: 300;
+}
+
+body.ficha .boton_catalogo a.btn:hover{    
+  -webkit-transform: scale(1.1);
+  color: #e12a27;
+  border: 1px solid #e12a27;
+
+}
+
+body.ficha .boton_catalogo {
+  position: absolute;
+  top: 50px;
+  right: 20px;
+}
+
+iframe {
+  width: 100%;
+  height: 100%;
+}
+
+.ficha-item {
+  font-size: calc(0.1em + 1vw);
+  /*
+  background: url('../../images/bg/flecha_color.jpg') no-repeat;
+  background-position: 0px 4px;
+  padding-left: 40px;
+  */
+  color: #3a3a3a;
+  margin-bottom: calc(0.7em + 1vw);
+}
+
+.ficha-item h3 {
+  font-size: calc(0.7em + 1vw);
+  font-weight: 500;
+}
+
+.ficha-item p {
+  margin: 0;
+  font-weight: 300;
+}
+
+.ficha-item img {
+  text-align: center;
+}
+
+.ficha-item ul {
+  margin: 0;
+  font-weight: 300;  
+}
+
+.ficha-item ul {
+  list-style: bullets; /* Remove default bullets */
+}
+
+
+ul.columna_derecha_informacion_tecnica {
+  margin: 0;
+  font-weight: 300;
+  margin-bottom: 2em;
+}
+
+ul.columna_derecha_informacion_tecnica, ul.columna_derecha_informacion_tecnica li ul {
+  list-style: bullets; /* Remove default bullets */
+}
+
+ul.columna_derecha_informacion_tecnica li ul {
+  font-weight: 200;
+}

@@ -1,5 +1,8 @@
+"use client";
+
 import { Sparkles, ArrowRight } from "lucide-react";
 import Reveal from "@/components/Reveal";
+import { trackCta } from "@/lib/tracking";
 
 export default function EligeTuVidrio() {
   return (
@@ -26,17 +29,14 @@ export default function EligeTuVidrio() {
                 </p>
               </div>
 
-              {/* PROVISORIO (07/09/2026): la herramienta es una app estática
-                  aparte (Bootstrap + jQuery) que hoy vive en el WordPress.
-                  Mientras el sitio nuevo esté en el dominio de Vercel, el
-                  botón apunta al WordPress para que no dé 404. Este link SE
-                  ROMPE el día que se migre el dominio: antes de eso hay que
-                  copiar la carpeta a /public/elegituvidrio y volver a
-                  href="/elegituvidrio/". Ver docs/elegi-tu-vidrio.md */}
+              {/* La herramienta vive en public/elegituvidrio (migrada el
+                  23/09/2026 desde el WordPress, misma URL). Abre en pestaña
+                  nueva porque es una app aparte con su propio diseño. */}
               <a
-                href="https://www.blindex.com.ar/elegituvidrio/"
+                href="/elegituvidrio/"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackCta("elegi_tu_vidrio")}
                 className="btn-primary shrink-0 whitespace-nowrap"
               >
                 Elegí tu vidrio

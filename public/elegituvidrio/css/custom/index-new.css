@@ -1,0 +1,37 @@
+/*
+ * Custom CSS para index
+ */
+
+ body {
+  height: 100%;   
+  font-family: 'Open Sans', sans-serif;
+  
+}
+
+ .img-button {
+ 	max-width: 97%;
+ }
+
+ .img-button:hover {
+	/*border: 1px solid transparent;*/
+ }
+ .img-button:hover, .seleccionado {
+	/*border: 1px solid #ff5252;*/
+ }
+
+ button.continuar {
+	background: #e02725;
+	color: #FFFFFF;
+	border-radius: 0px;
+	width: 50%;
+	-webkit-transform: scale(0.8);
+
+ }
+
+ button.continuar:hover {
+	background: #e02725;
+	color: #FFFFFF !important;
+	border: 1px solid #e02725 !important;
+	-webkit-transform: scale(0.85);
+
+ }

@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <!-- base: Next sirve /elegituvidrio sin barra final; sin esto las rutas relativas (css/, js/, images/) se irían a la raíz del sitio. -->
+    <base href="/elegituvidrio/">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <title>Blindex | Blindex Solar</title>
+    <link rel="canonical" href="">
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <link href="plugins/fontawesome-free-5.9.0-web/css/all.css" rel="stylesheet">
+</head>
+  <body>
+    <div class="left-layer"></div>
+    <div class="left-layer left-layer--2"></div>
+    <div class="left-layer left-layer--3"></div>
+    <div class="left-layer left-layer--4"></div>
+    <div class="cover-container d-flex w-100 h-100 mx-auto flex-column">
+
+  <header class="masthead">    
+
+      <h3 class="masthead-brand"><a href="index.html"><img src="images/logos/blindex.png" width="110" /></a>
+      </h3>
+
+      <div>
+
+        <h1 style="float: left;padding: 0; margin: 0; font-size: 2em; font-weight: 300">Blindex Solar</h1>     
+      </div>      
+    
+  </header>
+
+  <main role="main" class="p-3">
+  
+      <div class="row">       
+
+         <div class="col-lg-6 preguntas_contenedor">
+
+           <div class="col-lg-12 preguntas">
+
+             <h4 class="accidentes_solar_ no_show">       
+
+                ¿Tus hijos juegan y corren cerca de las ventanas?<br />
+                ¿Los abuelos tropiezan y golpean contra el vidrio?<br />
+                ¿El sol que ingresa por tus ventanas se torna molesto?              
+
+             </h4>
+
+             <h4 class="solar_ no_show">       
+                    
+                ¿El sol que ingresa por tus ventanas se torna molesto?              
+
+             </h4>
+
+             <p class="accidentes_solar_ no_show">
+                <strong>Blindex Solar</strong> te protege de la excesiva radiación del sol a la vez que resguarda la seguridad de las personas ante eventuales accidentes.  Si se quiebra, los trozos de vidrio quedarán adheridos a la lámina que lo compone: las personas seguras y el vidrio no se desmorona. 
+             </p>            
+             
+             <p class="solar_ no_show">
+                <strong>Blindex Solar</strong> te protege de la excesiva radiación del sol a la vez que resguarda la seguridad de las personas ante eventuales accidentes.
+             </p>  
+          
+          </div>
+          
+        </div>
+
+        <div class="col-lg-6">
+
+          <div class="row">  
+          
+            <div class="col-lg-12">
+
+              <video style="width: 100%;" controls poster="videos/04_blindex_solar.jpg">
+                <source src="videos/04_blindex_solar.mp4" type="video/mp4">
+                No soporta video
+              </video>
+
+            </div>
+
+            
+
+         </div>
+
+        </div>
+
+        <div class="col-lg-12 botones">
+
+           <div class="row">  
+
+            <div class="col-lg-6">
+
+             <a href="javascript:beneficios()" class="btn btn-block btn-secondary ficha_beneficios">
+             <strong>BENEFICIOS DEL PRODUCTO</strong>            
+
+               <div class="iconos">
+                  <div id="accidentes">
+                    <img src="images/icons/iconos_blanco_noaccidentes.png" />
+                  </div>
+                  <div id="robo">
+                    <img src="images/icons/iconos_blanco_antirobo.png" />
+                  </div>
+                  <div id="ruidos">
+                    <img src="images/icons/iconos_blanco_acustica.png" />
+                  </div>
+                  <div id="energia">
+                    <img src="images/icons/iconos_blanco_ahorroenergia.png" />
+                  </div>
+                  <div id="solar">
+                    <img src="images/icons/iconos_blanco_protsolar.png" />
+                  </div>
+                
+
+                </div>
+
+              </a>
+
+          </div>
+
+
+            <div class="col-lg-6">
+
+               <a href="ficha-tecnica.html?file=ficha-blindex-laminado" class="btn btn-block btn-secondary ficha_tecnica">
+                <strong style="">FICHA TÉCNICA</strong> <i class="far fa-file-alt"></i></a>  
+
+            </div>
+
+           </div>
+          
+        </div>
+
+      </div>         
+
+       <div class="boton_catalogo">      
+            <a id="volver" href="index.html" class="btn btn-sm btn-secondary">Inicio <i class="fa fa-home fa-sm"></i></a> 
+       </div>
+
+  </main>
+
+</div>
+
+  <!-- Custom styles for this template -->
+  <link href="css/custom/cover.css" rel="stylesheet" />
+  <link href="css/custom/producto-new.css" rel="stylesheet" />
+  <link href="css/common-new.css" rel="stylesheet" />
+
+  <!-- Plugin -->
+  <script src="plugins/sweetalert2/sweetalert2.all.min.js"></script>
+  <link href="plugins/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
+  
+  <!-- JS -->
+  <script src="js/jquery-3.4.0.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/custom/producto.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/analytics.js"></script>
+  <script type="text/javascript">
+    
+    function beneficios() {
+
+      Swal.fire({
+        title: '<strong>Beneficios del Producto</strong>',
+        html:
+          '<p>Disfrutá del confort de la protección solar y viví tranquilo con el resguardo contra accidentes de Blindex.</p>',
+        animation: false,
+        confirmButtonText:'Cerrar',
+        confirmButtonClass: 'pepe'
+
+      })
+  }
+  </script>
+  
+  <script>
+    
+    //Link a ficha
+    linkFichaTecnica(getUrlVars()["n"],'resto_pais','frente')
+   
+  </script>
+</body>
+</html>

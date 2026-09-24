@@ -1,0 +1,185 @@
+/*
+ * Globals
+ */
+
+
+/* Links */
+a,
+a:focus,
+a:hover {
+  color: #fff;
+  cursor: pointer;
+}
+
+a i {
+  color: #e12a27;
+  margin: 10px;
+}
+
+/* Custom default button */
+.btn-secondary,
+.btn-secondary:hover,
+.btn-secondary:focus {
+  color: #FFFFFF;
+  text-shadow: none; /* Prevent inheritance from `body` */
+  background-color: #e12a27;
+  border: .05rem solid #e12a27;
+  font-weight: 500;
+}
+
+
+
+/*
+ * Base structure
+ */
+
+
+html { font-size: calc(0.5em + 1vw); font-weight: 300; }
+
+body {
+  height: 100%;
+  display: flex;
+  color: #fff;
+  background: #FFFFFF;
+}
+
+.left-layer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: auto;
+  left: -100%;
+  bottom: auto;
+  right: auto;
+  background: #494949;
+  transition: all 0.7s cubic-bezier(0.645, 0.045, 0.355, 1);
+  z-index: 1; 
+}
+.left-layer.active {
+  left: 100%;
+  z-index: 1; 
+}
+.left-layer--2 {
+  background: #e12a27;
+  transition-delay: 0.3s;
+  z-index: 1; 
+}
+.left-layer--3 {
+  background: #3d3e42;
+  transition-delay: 0.12s;
+  z-index: 1; 
+}
+.left-layer--4 {
+  background: #f45353;
+  transition-delay: 0.08s;
+  z-index: 1; 
+}
+
+body.ficha .boton_catalogo a.btn {
+   -webkit-transition: all 0.5s ease-in-out;
+     border-radius: 0px;
+    padding: 5px 20px;
+    font-size: 90%;
+    color: #333;
+    text-shadow: none; /* Prevent inheritance from `body` */
+    background-color: #fff;
+    border: .05rem solid #ccc;
+    font-weight: 300;
+}
+
+body.ficha .boton_catalogo a.btn:hover{    
+  -webkit-transform: scale(1.1);
+  color: #e12a27;
+  border: 1px solid #e12a27;
+
+}
+
+body.ficha .boton_catalogo {
+  position: fixed;
+  top: 3%;
+  right: 2%;
+}
+
+.pregunta {
+  font-size: calc(0.1em + 1vw);
+  /*background: url('../../images/bg/flecha_color.jpg') no-repeat;*/
+  background-position: 0px 4px;
+  padding-left: 40px;
+  color: #3a3a3a;
+  margin-bottom: calc(0.7em + 1vw);
+}
+
+h3 {
+  font-size: calc(0.7em + 1vw);
+  font-weight: 500;
+  margin-bottom: 3em;
+}
+
+p:not(.mensaje)::before {
+  content: url('../../images/bg/flecha_color.jpg');  /* Add content: \2022 is the CSS Code/unicode for a bullet */
+  display: inline-block; /* Needed to add space between the bullet and the text */ 
+  width: 1em; /* Also needed for space (tweak if needed) */
+  padding-right: 1.5em; 
+  position:relative; /*or absolute*/
+  top:5px;
+}
+
+p {
+  margin: 0;
+  font-weight: 300;
+  font-size: calc(0.7em + 1vw);
+}
+
+.seleccionar-provincia {
+  width: 60%;
+  margin-left: 25%;
+}
+
+.exposicion_solar a {
+  margin: 1em;
+}
+
+.exposicion_solar a  {
+  
+  -webkit-transition: 1s ease;
+  transition: 0.5s ease;
+}
+.exposicion_solar a img {
+  -webkit-transition: 1s ease;
+  transition: 0.5s ease;
+  width: 25%;
+}
+.exposicion_solar a:hover {
+  -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+}
+.exposicion_solar a:hover img {
+  -webkit-transform: scale(1.1);
+  -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+}
+
+
+@media (max-width: 767px) {
+  .pregunta {    
+    margin-top: 80px;
+    padding-left: 0px;
+  }
+  p {
+    font-size: 14px;
+  }
+  p:not(.mensaje)::before {
+    margin-right: 1.5rem;
+    top:  10px;
+  }
+  .seleccionar-provincia {
+    width: 100%;
+    margin-left: 0px;
+  }
+
+  .exposicion_solar a img {
+    width: 80%;
+  }
+}

@@ -1,9 +1,12 @@
-# Estado del sitio al 07/09/2026
+# Estado del sitio al 23/09/2026
 
 Qué hay construido hoy y qué falta. Las definiciones del cliente están en
 [reunion-inicial.md](./reunion-inicial.md); si algo se contradice, gana ese
-archivo. El feedback más reciente es el mail de Manuel (QUAR) del 04/09/2026:
-"lo veo todo OK", con un solo cambio de orden en la home.
+archivo. El feedback más reciente son los dos mails de Manuel (QUAR) del 22/09/2026
+reenviando respuestas de Blindex e Inés Menescaldi: llegaron las webs que
+faltaban, el Excel de puntos de venta y dos definiciones (nombres en la franja
+de distribuidores, y probar una sección de puntos de venta en la home debajo
+de los distribuidores). Capacitaciones sigue sin contenido ni fecha.
 
 Recordatorio de encuadre: Blindex es un **refresh visual**. El contenido del
 sitio actual se mantiene; lo que rehacemos es el diseño.
@@ -20,23 +23,26 @@ Orden real de las secciones en [page.tsx](../src/app/page.tsx):
 | 2 | Por qué Blindex | `home/PorQueBlindex.tsx` | ok |
 | 3 | Productos (5 líneas) | `home/Productos.tsx` | ok |
 | 4 | Exigí Blindex original | `home/Autenticidad.tsx` | ok. Subida arriba de Obras el 07/09 a pedido del cliente |
-| 5 | Red de distribuidores exclusivos | `home/RedDistribuidores.tsx` | 32 nombres, 24 con web. Faltan logos |
+| 5 | Red de distribuidores exclusivos | `home/RedDistribuidores.tsx` | 32 nombres, los 32 con link. Queda con nombres, sin logos |
+| 5b | Puntos de venta | `home/PuntosHome.tsx` | nueva el 24/09 a pedido de Blindex: provincia + 6 puntos con WhatsApp + botón a la página con la provincia filtrada |
 | 6 | Nuestras obras | `home/Obras.tsx` | ok, 25 obras |
-| 7 | Elegí tu vidrio | `home/EligeTuVidrio.tsx` | link provisorio al WordPress (ver abajo) |
+| 7 | Elegí tu vidrio | `home/EligeTuVidrio.tsx` | migrada a `public/elegituvidrio` el 23/09, botón a `/elegituvidrio/` |
 | 8 | Boletines | `home/Boletines.tsx` | ok |
 | 9 | CTA a puntos de venta | `home/CtaPuntos.tsx` | ok |
 
 **Red de distribuidores exclusivos.** Los 32 nombres están cargados en
-[distribuidoresExclusivos.ts](../src/data/distribuidoresExclusivos.ts). El
-07/09 se cargaron las webs de la planilla "Blindex webs.xlsx" (mail del 04/09),
-verificadas una por una. Faltan cinco (Baleno, Infissi, JMG, RM Obras Civiles,
-STA) y tres más cuyo dominio está caído: Aberturas Sur (`cristalesdelsur.com`),
-Cristales Monetti (`cristalesmonettisrl.com`) y Raffo y Barandalla
-(`rb-dvh.com.ar`); esos quedaron sin link hasta que el cliente confirme otra
-dirección o su Instagram. Los que sólo tienen Instagram linkean al perfil. Coppari se muestra como "Vidrios
-Bravi", que es su nombre comercial. Los logos siguen pendientes; sin logo, la
-ficha muestra el nombre como wordmark. No confundir con los 116 puntos de
-venta: son dos redes distintas.
+[distribuidoresExclusivos.ts](../src/data/distribuidoresExclusivos.ts) y desde
+el 23/09 los 32 tienen link, todos verificados. El 07/09 entraron 24 webs de
+la planilla "Blindex webs.xlsx"; el 22/09 Blindex mandó las cinco que faltaban
+(Baleno, Infissi, JMG, RM Obras Civiles, STA) y aprobó linkear a Instagram a
+los tres con dominio caído (Aberturas Sur, Cristales Monetti, Raffo y
+Barandalla). Los que sólo tienen Instagram linkean al perfil. Coppari se
+muestra como "Vidrios Bravi", que es su nombre comercial.
+
+Logos: el 22/09 Blindex dijo que prefiere que la franja quede con los nombres
+(Inés escribió "logo y el nombre"). No mandaron archivos, así que queda con
+nombres; si llegan, entran sin tocar el componente. No confundir con los 116
+puntos de venta: son dos redes distintas.
 
 ### Contacto (`/contacto`)
 
@@ -60,9 +66,39 @@ fingir que envió.
 ### Puntos de venta (`/puntos-de-venta`)
 
 Funcionalmente terminada: mapa Leaflet, listado, toggle lista/mapa en mobile,
-link directo a WhatsApp por sucursal. Los 116 puntos actuales salen del sitio
-viejo y tienen teléfonos fijos. **Falta el Excel verificado con WhatsApp por
-sucursal**, que el cliente dijo que tendría la semana del 07/09.
+link directo a WhatsApp por sucursal.
+
+**Excel verificado importado el 23/09.** La planilla del cliente está en
+[assets-fuente/pdv-blindex-2026-09-22.xlsx](../assets-fuente/pdv-blindex-2026-09-22.xlsx)
+(117 filas con WhatsApp, Instagram, web, dirección y teléfono). Resultado en
+[puntosDeVenta.ts](../src/data/puntosDeVenta.ts): **110 puntos**, 106 con
+WhatsApp, 94 con Instagram, 78 con web, 24 Select. El detalle completo de la
+importación está en el encabezado de ese archivo. Resumen:
+
+- Bajas: 7 puntos que el Excel marca como inexistentes o sin contacto, y 3
+  que están en el sitio viejo pero no en el Excel (Centro Cristales, Milton
+  Montero, Casa Segat), que quedaron comentados en el archivo hasta que el
+  cliente confirme.
+- Renombres: Vidrios H. Gomien, Aluminio Turdera, Lighuen (ex De La Canal).
+- Nuevos: Viforma (marcado Select por su posición en la planilla, a
+  confirmar), CCR Carpinterías, Mesopotamia Aberturas.
+- 9 cambios de dirección re-geocodificados con OpenStreetMap. Los marcados
+  "coords aprox" en el archivo cayeron a nivel calle: revisarlos en el mapa de
+  la preview y corregir a mano si el pin cae lejos.
+- 4 puntos vigentes sin WhatsApp (Leo Dimastro, Raffaelli, Alcons, Vidriería
+  Daverio): la card muestra "Llamar".
+- Nuevo campo `instagram` y botón en la card
+  ([CardPunto.tsx](../src/components/puntos/CardPunto.tsx)); "Visitar web"
+  ahora se muestra siempre que haya web, no sólo cuando falta WhatsApp.
+
+**Sección de puntos de venta en la home (24/09).** Pedida por Blindex el
+22/09 ("debajo de los distris, por más que esté en la barra"). Está en
+[PuntosHome.tsx](../src/components/home/PuntosHome.tsx): chips de provincia
+ordenadas por cantidad de puntos, los primeros 6 (4 en mobile, Select
+primero) con su WhatsApp, y un botón a `/puntos-de-venta?provincia=X` que
+llega con el filtro puesto (`PuntosClient` acepta `provinciaInicial`). La
+CTA del final de la home (`CtaPuntos`) se dejó; si se siente repetida, se
+saca.
 
 ### Capacitaciones Blindex (`/capacitaciones-blindex`)
 
@@ -88,27 +124,18 @@ Manuel aceptó que se cotice aparte si hace falta.
 
 ### Elegí tu vidrio
 
-Es una app estática aparte (Bootstrap + jQuery) que vive en el WordPress
-actual. **Desde el 07/09 el botón de la home apunta provisoriamente a
-`https://www.blindex.com.ar/elegituvidrio/`** en pestaña nueva, para que la
-preview no dé 404. Ese link se rompe el día del cambio de DNS, así que la
-migración es **bloqueante antes de mover el dominio**.
+**Migrada el 23/09.** La herramienta (app estática Bootstrap + jQuery) vive en
+`public/elegituvidrio/` con la misma URL que tenía en el WordPress, y el botón
+de la home apunta a `/elegituvidrio/`. Ya no depende del hosting viejo, así
+que **dejó de ser bloqueante para el cambio de dominio**. Se hizo un crawl
+completo (el mirror de agosto estaba incompleto), se recomprimieron los 17
+videos a 720p (de 1,4 GB a 107 MB) y se probaron las 31 combinaciones del
+selector sin 404. Tres videos del servidor original están truncados (06, 07 y
+13): pedirle los originales a Blindex si los tiene. Detalle completo en
+[elegi-tu-vidrio.md](./elegi-tu-vidrio.md).
 
-Plan (detalle en [elegi-tu-vidrio.md](./elegi-tu-vidrio.md) y en la nota de
-[next.config.mjs](../next.config.mjs)):
-
-1. Recomprimir los 9 videos con
-   [scripts/elegituvidrio-videos.sh](../scripts/elegituvidrio-videos.sh). Seis
-   pesan entre 80 y 114 MB (575 MB en total); a 720p quedan en 5 a 10 MB.
-2. Copiar el mirror a `public/elegituvidrio/`.
-3. Agregar `<base href="/elegituvidrio/">` en cada HTML: la app usa rutas
-   relativas y Next redirige `/elegituvidrio/` a `/elegituvidrio` sin barra,
-   con lo que `css/` y `js/` dejarían de resolver.
-4. Sumar el rewrite `/elegituvidrio` → `/elegituvidrio/index.html`.
-5. Volver el botón a `href="/elegituvidrio/"`.
-
-Copiada tal cual, la herramienta se va a ver como el sitio viejo. Restilarla es
-un ítem aparte, fuera del refresh.
+Copiada tal cual, la herramienta se ve como el sitio viejo. Restilarla es un
+ítem aparte, fuera del refresh.
 
 ### Redes sociales
 
@@ -118,27 +145,39 @@ mismas que linkea el sitio actual. Blindex no tiene LinkedIn propio, así que el
 ícono se sacó; la empresa madre (Vidriería Argentina S.A.) sí tiene página y se
 puede sumar si el cliente lo pide.
 
+### Redirecciones desde el WordPress
+
+Hechas el 23/09: las 94 URLs del sitemap viejo y los 7 PDFs de `wp-content`
+tienen regla 301 en `next.config.mjs`, probadas una por una. Tabla y criterios
+en [redirecciones-wordpress.md](./redirecciones-wordpress.md). Hallazgo:
+"Casa interactiva" no era una herramienta sino una página de texto con un video
+de YouTube que ya está en Capacitación online; redirige ahí.
+
 ## Pendiente del lado nuestro
 
-- Migración de "Elegí tu vidrio" (bloqueante antes del DNS, ver arriba).
+- Revisar en el mapa los puntos marcados "coords aprox" en `puntosDeVenta.ts`.
 - Configurar las variables de entorno de Resend en Vercel y probar los dos
-  formularios de punta a punta.
+  formularios de punta a punta. **Bloqueante antes del DNS.**
+- Términos y condiciones: el WordPress tiene la página y el sitio nuevo no.
+  Hoy redirige a la home; decidir si se porta el texto.
 - `metadataBase` en `layout.tsx` apunta a `blindex.com.ar` (correcto para
   producción; hoy el Open Graph de la preview sale con ese dominio).
-- `lib/tracking.ts` es un `console.log`: falta GA4 o el pixel que se defina.
-  El sitio actual usa Universal Analytics, que dejó de medir en 2023.
-- Importar el Excel de puntos de venta cuando llegue (geocodificar direcciones
-  nuevas, marcar Select, WhatsApp por punto).
+- Medición instrumentada el 24/09 (GA4 + Clarity + eventos, ver
+  [medicion.md](./medicion.md)). Falta cargar los IDs en Vercel y en
+  `public/elegituvidrio/js/analytics.js`.
 - Antes del cambio de dominio: confirmar quién es dueño del proyecto Vercel
   para agregar el dominio.
 
 ## Pendiente del cliente
 
-- Excel de puntos de venta verificados con WhatsApp por sucursal.
-- Logos de los 32 distribuidores (pedidos el 10/08).
-- Webs que faltan: Baleno, Infissi, JMG, RM Obras Civiles, STA. Y una
-  alternativa para los tres dominios caídos: Aberturas Sur, Cristales Monetti
-  y Raffo y Barandalla.
+- Confirmar la baja de Centro Cristales, Milton Montero y Casa Segat (están
+  en el sitio viejo y no en el Excel) y que Viforma es Select.
+- Quién maneja el DNS de blindex.com.ar (pedido el 07/09, sin respuesta) y si
+  el hosting actual puede seguir activo unas semanas después del cambio.
+- Logos de los 32 distribuidores: el cliente prefiere nombres, así que ya no
+  bloquea nada.
 - Contenido de capacitaciones (módulos, temas, cuestionarios, certificado) y
   autorización de CAVIPLAN.
 - Video de portada nuevo (concepto "vidrio crudo vs. laminado").
+- Originales de los videos 06, 07 y 13 de "Elegí tu vidrio", que en su servidor
+  están truncados.

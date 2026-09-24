@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { trackCta } from "@/lib/tracking";
 import { MapPin, ArrowRight } from "lucide-react";
 import Reveal from "@/components/Reveal";
 
@@ -11,7 +14,7 @@ export default function CtaPuntos() {
     // blanca sobre gris, que es lo que la hace leer como card.
     // El pb va recortado: con el padding completo de `section` más el margen
     // del footer quedaban 200px de blanco muerto entre la card y el footer.
-    <section className="section bg-gradient-to-b from-paper via-paper to-white pt-0 pb-12 sm:pb-16">
+    <section id="cta-puntos" className="section bg-gradient-to-b from-paper via-paper to-white pt-0 pb-12 sm:pb-16">
       <div className="container-x">
         <Reveal>
           <div className="flex flex-col items-start gap-6 rounded-3xl border border-slate-200 bg-white p-8 shadow-sm sm:flex-row sm:items-center sm:justify-between sm:p-10">
@@ -31,7 +34,7 @@ export default function CtaPuntos() {
               </div>
             </div>
 
-            <Link href="/puntos-de-venta" className="btn-primary shrink-0 whitespace-nowrap">
+            <Link href="/puntos-de-venta" className="btn-primary shrink-0 whitespace-nowrap" onClick={() => trackCta("cta_puntos_de_venta")}>
               Ver puntos de venta
               <ArrowRight className="h-4 w-4" />
             </Link>

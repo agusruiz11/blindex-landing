@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { trackCta } from "@/lib/tracking";
 import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { MapPin, ShieldCheck, ArrowRight } from "lucide-react";
 
@@ -42,7 +43,7 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative flex min-h-[92vh] items-center overflow-hidden bg-ink">
+    <section id="hero" className="relative flex min-h-[92vh] items-center overflow-hidden bg-ink">
       <div className="absolute inset-0">
         {MEDIA.tipo === "video" ? (
           <video
@@ -114,11 +115,11 @@ export default function Hero() {
           </motion.p>
 
           <motion.div variants={item} className="mt-10 flex flex-col gap-3 sm:flex-row">
-            <Link href="/puntos-de-venta" className="btn-primary">
+            <Link href="/puntos-de-venta" className="btn-primary" onClick={() => trackCta("hero_puntos_de_venta")}>
               <MapPin className="h-4 w-4" />
               Encontrá tu punto de venta
             </Link>
-            <Link href="/#elegi-tu-vidrio" className="btn-ghost">
+            <Link href="/#elegi-tu-vidrio" className="btn-ghost" onClick={() => trackCta("hero_elegi_tu_vidrio")}>
               Elegí tu vidrio
               <ArrowRight className="h-4 w-4" />
             </Link>

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { CheckCircle2, Send, Loader2 } from "lucide-react";
 import Reveal from "@/components/Reveal";
+import { trackFormEnviado } from "@/lib/tracking";
 
 type Respuestas = Record<string, string>;
 
@@ -101,6 +102,7 @@ export default function FormularioInscripcion() {
     try {
       await enviarInscripcion(datos, website);
       setEnviado(true);
+      trackFormEnviado("inscripcion_capacitacion");
     } catch (e) {
       setError(
         e instanceof Error && e.message

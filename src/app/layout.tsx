@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
+import Analytics from "@/components/Analytics";
 
 // El manual pide Myriad Pro (Light/Regular/Bold), con Arial de alternativa
 // para digital. Source Sans 3 es la humanista open source de Adobe, misma
@@ -72,6 +73,7 @@ export default function RootLayout({
         <main>{children}</main>
         <Footer />
         <WhatsAppFloat />
+        <Analytics />
       </body>
     </html>
   );

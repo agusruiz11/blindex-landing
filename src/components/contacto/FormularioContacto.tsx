@@ -2,6 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { Send, CheckCircle2, Loader2 } from "lucide-react";
+import { trackFormEnviado } from "@/lib/tracking";
 
 /**
  * Dos motivos de contacto en un solo formulario: la consulta general y la
@@ -59,6 +60,7 @@ export default function FormularioContacto() {
         return;
       }
       setEstado("enviado");
+      trackFormEnviado("contacto", datos.motivo);
     } catch {
       setError("No pudimos enviar tu consulta. Revisá tu conexión e intentá de nuevo.");
       setEstado("idle");

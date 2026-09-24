@@ -1,9 +1,9 @@
 "use client";
 
 import { forwardRef } from "react";
-import { MessageCircle, MapPin, Phone, Navigation, ShieldCheck, Globe } from "lucide-react";
+import { MessageCircle, MapPin, Phone, Navigation, ShieldCheck, Globe, Instagram } from "lucide-react";
 import type { PuntoDeVenta } from "@/data/puntosDeVenta";
-import { trackWhatsAppClick } from "@/lib/tracking";
+import { trackContacto } from "@/lib/tracking";
 
 type Props = {
   punto: PuntoDeVenta;
@@ -15,9 +15,9 @@ const CardPunto = forwardRef<HTMLElement, Props>(function CardPunto(
   { punto, active, onSelect },
   ref
 ) {
-  // La data real todavía no trae WhatsApp por sucursal (el sitio actual sólo
-  // publica fijos). Cuando no hay, la card promueve el teléfono en su lugar
-  // en vez de mostrar un botón roto.
+  // Desde el 23/09/2026 casi todos los puntos traen WhatsApp (Excel verificado
+  // por Blindex). Los pocos que no, promueven el teléfono en su lugar en vez
+  // de mostrar un botón roto.
   const waHref = punto.whatsapp
     ? `https://wa.me/${punto.whatsapp}?text=${encodeURIComponent(
         "Hola, los contacto desde la web de Blindex"
@@ -25,8 +25,15 @@ const CardPunto = forwardRef<HTMLElement, Props>(function CardPunto(
     : undefined;
   const mapsHref = `https://www.google.com/maps/dir/?api=1&destination=${punto.lat},${punto.lng}`;
   const telHref = punto.telefono ? `tel:${punto.telefono.replace(/[\s()]/g, "")}` : undefined;
-  // Cuántos botones secundarios hay, para no dejar media fila vacía.
-  const secundarios = 1 + ((waHref && telHref) || (!waHref && punto.web) ? 1 : 0);
+  const igHref = punto.instagram
+    ? `https://www.instagram.com/${punto.instagram}/`
+    : undefined;
+  // Botones secundarios: Cómo llegar siempre; Llamar sólo si el principal es
+  // WhatsApp (si no, el teléfono ya es el principal); Web e Instagram si hay.
+  // Se cuentan para elegir la grilla; con cantidad impar, el último botón
+  // ocupa las dos columnas para no dejar media fila vacía.
+  const secundarios =
+    1 + (waHref && telHref ? 1 : 0) + (punto.web ? 1 : 0) + (igHref ? 1 : 0);
 
   return (
     <article
@@ -79,7 +86,7 @@ const CardPunto = forwardRef<HTMLElement, Props>(function CardPunto(
             rel="noopener noreferrer"
             onClick={(e) => {
               e.stopPropagation();
-              trackWhatsAppClick(punto.id);
+              trackContacto("whatsapp", punto);
             }}
             className="inline-flex items-center justify-center gap-2 rounded-full bg-[#25D366] px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-emerald-500/20 hover:brightness-110 transition"
             aria-label={`Contactar por WhatsApp a ${punto.nombre}`}
@@ -90,7 +97,10 @@ const CardPunto = forwardRef<HTMLElement, Props>(function CardPunto(
         ) : telHref ? (
           <a
             href={telHref}
-            onClick={(e) => e.stopPropagation()}
+            onClick={(e) => {
+              e.stopPropagation();
+              trackContacto("llamada", punto);
+            }}
             className="inline-flex items-center justify-center gap-2 rounded-full bg-ink-900 px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-ink-900/20 hover:bg-ink-800 transition"
             aria-label={`Llamar a ${punto.nombre}`}
           >
@@ -99,12 +109,21 @@ const CardPunto = forwardRef<HTMLElement, Props>(function CardPunto(
           </a>
         ) : null}
 
-        <div className={secundarios > 1 ? "grid grid-cols-2 gap-2" : "grid gap-2"}>
+        <div
+          className={
+            secundarios > 1
+              ? "grid grid-cols-2 gap-2 [&>*:last-child:nth-child(odd)]:col-span-2"
+              : "grid gap-2"
+          }
+        >
           <a
             href={mapsHref}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={(e) => e.stopPropagation()}
+            onClick={(e) => {
+              e.stopPropagation();
+              trackContacto("como_llegar", punto);
+            }}
             className="inline-flex items-center justify-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 py-2 text-xs font-medium text-ink hover:border-ink-300 hover:text-ink-700 transition"
             aria-label={`Cómo llegar a ${punto.nombre}`}
           >
@@ -114,7 +133,10 @@ const CardPunto = forwardRef<HTMLElement, Props>(function CardPunto(
           {waHref && telHref && (
             <a
               href={telHref}
-              onClick={(e) => e.stopPropagation()}
+              onClick={(e) => {
+                e.stopPropagation();
+                trackContacto("llamada", punto);
+              }}
               className="inline-flex items-center justify-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 py-2 text-xs font-medium text-ink hover:border-ink-300 hover:text-ink-700 transition"
               aria-label={`Llamar a ${punto.nombre}`}
             >
@@ -122,17 +144,36 @@ const CardPunto = forwardRef<HTMLElement, Props>(function CardPunto(
               Llamar
             </a>
           )}
-          {!waHref && punto.web && (
+          {punto.web && (
             <a
               href={punto.web}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={(e) => e.stopPropagation()}
+              onClick={(e) => {
+                e.stopPropagation();
+                trackContacto("web", punto);
+              }}
               className="inline-flex items-center justify-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 py-2 text-xs font-medium text-ink hover:border-ink-300 hover:text-ink-700 transition"
               aria-label={`Visitar el sitio de ${punto.nombre}`}
             >
               <Globe className="h-3.5 w-3.5" />
               Visitar web
+            </a>
+          )}
+          {igHref && (
+            <a
+              href={igHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => {
+                e.stopPropagation();
+                trackContacto("instagram", punto);
+              }}
+              className="inline-flex items-center justify-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 py-2 text-xs font-medium text-ink hover:border-ink-300 hover:text-ink-700 transition"
+              aria-label={`Instagram de ${punto.nombre}`}
+            >
+              <Instagram className="h-3.5 w-3.5" />
+              Instagram
             </a>
           )}
         </div>

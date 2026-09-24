@@ -16,9 +16,18 @@ const MapaPuntos = dynamic(() => import("./MapaPuntos"), {
   ),
 });
 
-export default function PuntosClient() {
+export default function PuntosClient({
+  provinciaInicial,
+}: {
+  /** Provincia con la que arranca el filtro (viene de ?provincia= en la URL). */
+  provinciaInicial?: string;
+}) {
   const [query, setQuery] = useState("");
-  const [provincia, setProvincia] = useState<string>("todas");
+  const [provincia, setProvincia] = useState<string>(() =>
+    provinciaInicial && puntosDeVenta.some((p) => p.provincia === provinciaInicial)
+      ? provinciaInicial
+      : "todas"
+  );
   const [soloSelect, setSoloSelect] = useState(false);
   const [selectedId, setSelectedId] = useState<string | null>(puntosDeVenta[0]?.id ?? null);
   const [mobileView, setMobileView] = useState<"lista" | "mapa">("lista");

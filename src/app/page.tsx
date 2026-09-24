@@ -4,9 +4,11 @@ import Productos from "@/components/home/Productos";
 import Obras from "@/components/home/Obras";
 import Autenticidad from "@/components/home/Autenticidad";
 import RedDistribuidores from "@/components/home/RedDistribuidores";
+import PuntosHome from "@/components/home/PuntosHome";
 import EligeTuVidrio from "@/components/home/EligeTuVidrio";
 import Boletines from "@/components/home/Boletines";
 import CtaPuntos from "@/components/home/CtaPuntos";
+import TrackSecciones from "@/components/TrackSecciones";
 
 export default function Home() {
   return (
@@ -24,10 +26,15 @@ export default function Home() {
           prueba concreta de autenticidad. Si se vuelve a mover Autenticidad,
           esta sección se mueve con ella. */}
       <RedDistribuidores />
+      {/* Puntos de venta debajo de los distribuidores: pedido de Blindex del
+          22/09/2026. La red dice quién distribuye; esto, dónde se compra. */}
+      <PuntosHome />
       <Obras />
       <EligeTuVidrio />
       <Boletines />
       <CtaPuntos />
+      {/* Evento seccion_vista por cada <section id> de la home. */}
+      <TrackSecciones />
     </>
   );
 }

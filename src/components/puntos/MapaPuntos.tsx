@@ -5,7 +5,7 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { useEffect, useRef } from "react";
 import type { PuntoDeVenta } from "@/data/puntosDeVenta";
-import { trackWhatsAppClick } from "@/lib/tracking";
+import { trackContacto } from "@/lib/tracking";
 
 // Fix bug clásico de íconos de marker en bundlers modernos (Next.js).
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -147,7 +147,7 @@ export default function MapaPuntos({ puntos, selectedId, onSelect }: Props) {
                   )}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  onClick={() => trackWhatsAppClick(p.id)}
+                  onClick={() => trackContacto("whatsapp", p, "mapa")}
                   className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-[#25D366] px-3 py-1.5 text-xs font-semibold text-white"
                 >
                   WhatsApp
@@ -155,6 +155,7 @@ export default function MapaPuntos({ puntos, selectedId, onSelect }: Props) {
               ) : p.telefono ? (
                 <a
                   href={`tel:${p.telefono.replace(/[\s()]/g, "")}`}
+                  onClick={() => trackContacto("llamada", p, "mapa")}
                   className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-[#12151A] px-3 py-1.5 text-xs font-semibold text-white"
                 >
                   {p.telefono}

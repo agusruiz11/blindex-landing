@@ -1,6 +1,7 @@
 import Hero from "@/components/home/Hero";
 import PorQueBlindex from "@/components/home/PorQueBlindex";
 import Productos from "@/components/home/Productos";
+import ProductoDestacado from "@/components/home/ProductoDestacado";
 import Obras from "@/components/home/Obras";
 import Autenticidad from "@/components/home/Autenticidad";
 import RedDistribuidores from "@/components/home/RedDistribuidores";
@@ -16,6 +17,9 @@ export default function Home() {
       <Hero />
       <PorQueBlindex />
       <Productos />
+      {/* Zócalo de producto destacado: pedido de Estefi (VASA) del 15/10/2026,
+          con maqueta. Va entre la grilla de productos y Autenticidad. */}
+      <ProductoDestacado />
       {/* Orden pedido por el cliente (mail del 04/09/2026): "Exigí Blindex
           original" va antes que "Nuestras obras". Después de mostrar QUÉ vende
           la marca, primero el mensaje de autenticidad y recién después la

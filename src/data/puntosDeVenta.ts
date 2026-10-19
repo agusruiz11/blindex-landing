@@ -32,8 +32,10 @@
 //    localidad. Los códigos "plus" de Google (EAS, AAG, ALW, HSE) se quitaron.
 //
 // ⚠️ A CONFIRMAR CON EL CLIENTE (avisado a Manuel el 22/09; se sacan del
-// listado salvo que digan lo contrario). Si los confirman, descomentar:
-//   { id: "centro-cristales", nombre: "Centro Cristales", direccion: "Hipolito Yrigoyen 12771", localidad: "Buenos Aires", provincia: "Buenos Aires", lat: -34.803387, lng: -58.406115, telefono: "42934300" },
+// listado salvo que digan lo contrario). Estefi (VASA) confirmó el 23/09 que
+// Centro Cristales y Gomien siguen: Centro Cristales se volvió a sumar el
+// 19/10 (Gomien ya estaba, como Vidrios H. Gomien). Los dos de abajo siguen
+// en validación por la marca; si los confirman, descomentar:
 //   { id: "milton-montero", nombre: "Milton Montero", direccion: "rawson 2951", localidad: "Buenos Aires", provincia: "Buenos Aires", lat: -38.005728, lng: -57.556918, telefono: "(0223) 4422018" },
 //   { id: "casa-segat-saic", nombre: "Casa Segat SAIC", direccion: "Chile 2556/64", localidad: "CABA", provincia: "CABA", lat: -34.617706, lng: -58.401783 },
 // ─────────────────────────────────────────────────────────────────────────
@@ -80,6 +82,7 @@ export const puntosDeVenta: PuntoDeVenta[] = [
   { id: "blanco-vidrios", nombre: "Blanco Vidrios", direccion: "San Juan 1201", localidad: "Mar del Plata", provincia: "Buenos Aires", lat: -37.987288, lng: -57.559959, whatsapp: "5492234384992", telefono: "0223 483-4992", instagram: "blancovidrios" },
   { id: "cadivi", nombre: "Cadivi", direccion: "Calle 47 N° 1773", localidad: "La Plata", provincia: "Buenos Aires", lat: -34.934908, lng: -57.976318, whatsapp: "5492215010694", telefono: "0221-479 0000", web: "http://www.cadivi.com.ar/", instagram: "cadivi_vidrios" },
   { id: "ccr-carpinterias", nombre: "CCR Carpinterias", direccion: "Blas Parera 3390", localidad: "Burzaco", provincia: "Buenos Aires", lat: -34.846535, lng: -58.416194, whatsapp: "5491528652618", telefono: "42934300", web: "https://www.ccrcarpinterias.com.ar", instagram: "ccrcarpinterias" }, // nuevo 22/09
+  { id: "centro-cristales", nombre: "Centro Cristales", direccion: "Hipolito Yrigoyen 12771", localidad: "Buenos Aires", provincia: "Buenos Aires", lat: -34.803387, lng: -58.406115, telefono: "42934300" }, // vuelve el 19/10 (confirmado por Estefi el 23/09) · sin WhatsApp en el Excel: la card muestra "Llamar"
   { id: "consca-s-a", nombre: "Consca S.A.", direccion: "Moreno 3776", localidad: "Mar del Plata", provincia: "Buenos Aires", lat: -37.995913, lng: -57.560733, whatsapp: "5492234911919", telefono: "(0223) 154-009124", web: "https://www.consca.com/", instagram: "consca_mas" },
   { id: "cruellas-cristales", nombre: "Cruellas Cristales", direccion: "Jorge Newbery 9494", localidad: "Pergamino", provincia: "Buenos Aires", lat: -33.900221, lng: -60.566923, whatsapp: "5492477590861", telefono: "2477590861", instagram: "cruellas.cristales" },
   { id: "doble-m-aberturas", nombre: "Doble M Aberturas", direccion: "Av. Presidente Perón 6937", localidad: "Villa Udaondo", provincia: "Buenos Aires", lat: -34.63211, lng: -58.660536, whatsapp: "5491157154799", telefono: "4450-2264", instagram: "aberturasdobleM" }, // dirección nueva, coords del sitio viejo: revisar

@@ -115,7 +115,15 @@ export default function Footer() {
             los derechos reservados.
           </p>
           <p className="text-xs text-white/45">
-            © {new Date().getFullYear()} Blindex.
+            © {new Date().getFullYear()} Blindex. Hecho por{" "}
+            <a
+              href="https://posicionarte.online"
+              target="_blank"
+              rel="noopener"
+              className="underline decoration-white/25 underline-offset-2 hover:text-white/80"
+            >
+              posicionarte.online
+            </a>
           </p>
         </div>
       </div>

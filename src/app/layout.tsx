@@ -3,7 +3,6 @@ import { Source_Sans_3 } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import WhatsAppFloat from "@/components/WhatsAppFloat";
 import Analytics from "@/components/Analytics";
 
 // El manual pide Myriad Pro (Light/Regular/Bold), con Arial de alternativa
@@ -72,7 +71,7 @@ export default function RootLayout({
         <Navbar />
         <main>{children}</main>
         <Footer />
-        <WhatsAppFloat />
+        {/* Botón flotante de WhatsApp sacado el 21/10/2026 a pedido de la marca. El componente sigue en components/WhatsAppFloat.tsx. */}
         <Analytics />
       </body>
     </html>

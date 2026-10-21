@@ -10,8 +10,6 @@ import { trackCta } from "@/lib/tracking";
 // con la foto de obra, "Encontrá tu punto de venta" y un "Ver más" que abre
 // la ficha en PDF. Para cambiar el producto destacado alcanza con tocar esta
 // constante y reemplazar la foto y el PDF en public/.
-// El borde inferior de la sección la separa de Autenticidad, que también es
-// oscura y va justo debajo (igual que en la maqueta del cliente).
 const DESTACADO = {
   nombre: "Blindex Solar Neutro Light",
   bajada: "Vidrio laminado de control solar neutro.",
@@ -26,7 +24,7 @@ export default function ProductoDestacado() {
   return (
     <section
       id="producto-destacado"
-      className="relative overflow-hidden border-b border-white/10 bg-ink text-white"
+      className="relative overflow-hidden bg-ink text-white"
     >
       {/* En mobile la foto ocupa todo el fondo; en desktop, la mitad derecha.
           El degradé desde la izquierda asegura el contraste del texto. */}

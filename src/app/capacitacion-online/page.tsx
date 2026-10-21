@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Reveal from "@/components/Reveal";
 import { capacitacionOnline } from "@pais/capacitacionOnline";
+import { exigirPagina } from "@/lib/paginas";
 
 // OJO: esta es la capacitación online ABIERTA, que ya existe hoy en
 // blindex.com.ar/capacitaciones/. No confundir con /capacitaciones-blindex,
@@ -13,6 +14,7 @@ export const metadata: Metadata = {
 };
 
 export default function CapacitacionOnlinePage() {
+  exigirPagina("capacitacionOnline");
   return (
     <div className="pt-28 pb-24">
       <div className="container-x">

@@ -5,7 +5,7 @@
 // El alias @pais/* sale del tsconfig de cada país: tsconfig.json apunta a
 // src/paises/ar y tsconfig.<pais>.json a la carpeta de ese país. Next usa
 // ese mismo archivo para chequear tipos y para resolver los imports.
-const PAISES = ["ar"];
+const PAISES = ["ar", "py"];
 const PAIS = process.env.PAIS || "ar";
 if (!PAISES.includes(PAIS)) {
   throw new Error(`PAIS="${PAIS}" no existe. Opciones: ${PAISES.join(", ")}.`);

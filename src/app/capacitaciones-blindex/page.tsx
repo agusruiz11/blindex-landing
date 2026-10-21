@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { GraduationCap, ArrowRight } from "lucide-react";
 import Reveal from "@/components/Reveal";
+import { exigirPagina } from "@/lib/paginas";
 
 // Ruta oculta: no se linkea desde el menú ni el footer, y no se indexa.
 //
@@ -20,6 +21,7 @@ export const metadata: Metadata = {
 };
 
 export default function CapacitacionesPage() {
+  exigirPagina("capacitaciones");
   return (
     <div className="pt-28 sm:pt-32 pb-20">
       <div className="container-x">

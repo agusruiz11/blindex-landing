@@ -4,6 +4,8 @@ import { useMemo, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import { Search, Map as MapIcon, List, ShieldCheck } from "lucide-react";
 import { puntosDeVenta } from "@pais/puntosDeVenta";
+import { sitio } from "@pais/sitio";
+import type { LineaId } from "@/paises/tipos";
 import CardPunto from "./CardPunto";
 
 // Leaflet no soporta SSR — se carga solo en cliente.
@@ -16,33 +18,56 @@ const MapaPuntos = dynamic(() => import("./MapaPuntos"), {
   ),
 });
 
+// En los países con líneas (Paraguay) laminado y templado son redes
+// distintas: primero se elige la línea y el resto de los filtros trabaja
+// sobre los puntos de esa línea.
+const lineas = sitio.lineas;
+const deLinea = (linea: LineaId | undefined) =>
+  lineas && linea ? puntosDeVenta.filter((p) => p.lineas?.includes(linea)) : puntosDeVenta;
+// El filtro "Puntos Select" sólo tiene sentido donde hay puntos Select.
+const haySelect = puntosDeVenta.some((p) => p.select);
+
 export default function PuntosClient({
   provinciaInicial,
+  lineaInicial,
 }: {
   /** Provincia con la que arranca el filtro (viene de ?provincia= en la URL). */
   provinciaInicial?: string;
+  /** Línea con la que arranca, en países con líneas (viene de ?linea=). */
+  lineaInicial?: string;
 }) {
+  const [linea, setLinea] = useState<LineaId | undefined>(
+    () => lineas?.find((l) => l.id === lineaInicial)?.id ?? lineas?.[0]?.id
+  );
+  const puntosLinea = useMemo(() => deLinea(linea), [linea]);
   const [query, setQuery] = useState("");
   const [provincia, setProvincia] = useState<string>(() =>
-    provinciaInicial && puntosDeVenta.some((p) => p.provincia === provinciaInicial)
+    provinciaInicial && puntosLinea.some((p) => p.provincia === provinciaInicial)
       ? provinciaInicial
       : "todas"
   );
   const [soloSelect, setSoloSelect] = useState(false);
-  const [selectedId, setSelectedId] = useState<string | null>(puntosDeVenta[0]?.id ?? null);
+  const [selectedId, setSelectedId] = useState<string | null>(puntosLinea[0]?.id ?? null);
   const [mobileView, setMobileView] = useState<"lista" | "mapa">("lista");
 
   const cardRefs = useRef<Record<string, HTMLElement | null>>({});
   const listRef = useRef<HTMLDivElement>(null);
 
   const provincias = useMemo(
-    () => Array.from(new Set(puntosDeVenta.map((p) => p.provincia))).sort(),
-    []
+    () => Array.from(new Set(puntosLinea.map((p) => p.provincia))).sort(),
+    [puntosLinea]
   );
+
+  const cambiarLinea = (l: LineaId) => {
+    setLinea(l);
+    const nuevos = deLinea(l);
+    if (!nuevos.some((p) => p.provincia === provincia)) setProvincia("todas");
+    setSelectedId(nuevos[0]?.id ?? null);
+  };
 
   const filtrados = useMemo(() => {
     const q = query.trim().toLowerCase();
-    return puntosDeVenta.filter((p) => {
+    return puntosLinea.filter((p) => {
       const okProv = provincia === "todas" ? true : p.provincia === provincia;
       const okSelect = soloSelect ? !!p.select : true;
       const okQ =
@@ -52,7 +77,7 @@ export default function PuntosClient({
         p.direccion.toLowerCase().includes(q);
       return okProv && okQ && okSelect;
     });
-  }, [query, provincia, soloSelect]);
+  }, [puntosLinea, query, provincia, soloSelect]);
 
   const handleSelect = (id: string, scroll = true) => {
     setSelectedId(id);
@@ -122,9 +147,9 @@ export default function PuntosClient({
                   value={provincia}
                   onChange={(e) => setProvincia(e.target.value)}
                   className="rounded-full border border-slate-200 bg-white px-4 py-2.5 text-sm outline-none focus:border-ink-500 focus:ring-2 focus:ring-ink-500/20"
-                  aria-label="Filtrar por provincia"
+                  aria-label={`Filtrar por ${sitio.region.singular}`}
                 >
-                  <option value="todas">Todas las provincias</option>
+                  <option value="todas">{sitio.region.todas}</option>
                   {provincias.map((p) => (
                     <option key={p} value={p}>
                       {p}
@@ -133,19 +158,40 @@ export default function PuntosClient({
                 </select>
               </div>
               <div className="mt-2 flex items-center justify-between gap-2 px-1">
-                <button
-                  type="button"
-                  onClick={() => setSoloSelect((v) => !v)}
-                  aria-pressed={soloSelect}
-                  className={`inline-flex items-center gap-1 rounded-full border px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide transition ${
-                    soloSelect
-                      ? "border-brand-500/40 bg-brand-500 text-white shadow-sm shadow-brand-500/20"
-                      : "border-brand-500/30 bg-brand-500/10 text-brand-600 hover:bg-brand-500/20"
-                  }`}
-                >
-                  <ShieldCheck className="h-3 w-3" />
-                  Puntos Select
-                </button>
+                {lineas ? (
+                  <div role="tablist" aria-label="Línea" className="inline-flex rounded-full border border-slate-200 bg-white p-0.5 text-xs">
+                    {lineas.map((l) => (
+                      <button
+                        key={l.id}
+                        type="button"
+                        role="tab"
+                        aria-selected={l.id === linea}
+                        onClick={() => cambiarLinea(l.id)}
+                        className={`rounded-full px-3 py-1 font-semibold transition ${
+                          l.id === linea ? "bg-ink-900 text-white" : "text-ink/70 hover:text-ink"
+                        }`}
+                      >
+                        {l.nombre}
+                      </button>
+                    ))}
+                  </div>
+                ) : haySelect ? (
+                  <button
+                    type="button"
+                    onClick={() => setSoloSelect((v) => !v)}
+                    aria-pressed={soloSelect}
+                    className={`inline-flex items-center gap-1 rounded-full border px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide transition ${
+                      soloSelect
+                        ? "border-brand-500/40 bg-brand-500 text-white shadow-sm shadow-brand-500/20"
+                        : "border-brand-500/30 bg-brand-500/10 text-brand-600 hover:bg-brand-500/20"
+                    }`}
+                  >
+                    <ShieldCheck className="h-3 w-3" />
+                    Puntos Select
+                  </button>
+                ) : (
+                  <span />
+                )}
                 <span className="text-xs text-ink/55">
                   {filtrados.length} resultado{filtrados.length === 1 ? "" : "s"}
                 </span>
@@ -183,7 +229,7 @@ export default function PuntosClient({
             <div className="lg:sticky lg:top-24">
               <div className="h-[60vh] lg:h-[calc(100vh-8rem)] overflow-hidden rounded-2xl ring-1 ring-slate-200 shadow-sm">
                 <MapaPuntos
-                  puntos={filtrados.length > 0 ? filtrados : puntosDeVenta}
+                  puntos={filtrados.length > 0 ? filtrados : puntosLinea}
                   selectedId={selectedId}
                   onSelect={(id) => handleSelect(id, true)}
                 />

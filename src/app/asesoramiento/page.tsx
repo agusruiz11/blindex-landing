@@ -4,6 +4,7 @@ import { FileDown, ArrowRight, Scale } from "lucide-react";
 import Reveal from "@/components/Reveal";
 import { boletines } from "@pais/boletines";
 import { notas } from "@pais/notas";
+import { exigirPagina } from "@/lib/paginas";
 
 export const metadata: Metadata = {
   title: "Asesoramiento técnico y legal — Blindex",
@@ -12,6 +13,7 @@ export const metadata: Metadata = {
 };
 
 export default function AsesoramientoPage() {
+  exigirPagina("asesoramiento");
   return (
     <div className="pt-28 pb-24">
       <div className="container-x">

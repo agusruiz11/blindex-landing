@@ -73,6 +73,10 @@ export type Producto = {
   /** Videos de producto ya publicados en el sitio actual. */
   video?: { src: string; titulo: string }[];
   urlActual: string;
+  /** Línea a la que pertenece, en los países que separan productos por línea (Paraguay). */
+  linea?: LineaId;
+  /** Fichas y folletos propios del producto. Sin esto, la ficha muestra los boletines generales. */
+  documentos?: { titulo: string; pdf: string }[];
 };
 
 export type PuntoDeVenta = {
@@ -91,10 +95,45 @@ export type PuntoDeVenta = {
   instagram?: string;
   /** "Punto de venta Select" — la red recomendada por la marca. */
   select?: boolean;
+  /** Líneas que vende, en los países que separan la red por línea (Paraguay). */
+  lineas?: LineaId[];
 };
 
 
 export type Enlace = { href: string; label: string };
+
+/** Líneas de producto. Hoy sólo Paraguay separa productos y puntos de venta así. */
+export type LineaId = "laminado" | "templado";
+
+export type Linea = {
+  id: LineaId;
+  nombre: string;
+  /** Una línea para explicar para qué sirve y en qué se diferencia de la otra. */
+  bajada: string;
+  usos: string[];
+};
+
+/** Secciones de la home, en el orden en que se muestran. */
+export type SeccionHome =
+  | "hero"
+  | "porQue"
+  | "productos"
+  | "productoDestacado"
+  | "autenticidad"
+  | "redDistribuidores"
+  | "puntos"
+  | "obras"
+  | "elegiTuVidrio"
+  | "boletines"
+  | "ctaPuntos";
+
+/** Páginas que no todos los países tienen. Las que faltan responden 404. */
+export type PaginaOpcional =
+  | "contacto"
+  | "nuestrasObras"
+  | "asesoramiento"
+  | "capacitaciones"
+  | "capacitacionOnline";
 
 /** Textos y datos generales del sitio de cada país (src/paises/<pais>/sitio.ts). */
 export type Sitio = {
@@ -111,6 +150,18 @@ export type Sitio = {
   /** Descripción al compartir el link (Open Graph). */
   descripcionCompartir: string;
   menu: Enlace[];
+  home: SeccionHome[];
+  paginas: PaginaOpcional[];
+  /**
+   * Cómo se llama la división del país en los puntos de venta (el campo
+   * `provincia` de cada punto): provincia en Argentina, departamento en
+   * Paraguay.
+   */
+  region: { singular: string; plural: string; todas: string };
+  /** Bajada de la sección de puntos de venta de la home. */
+  puntosBajada: (puntos: number, regiones: number) => string;
+  /** Líneas de producto. Sin esto, los productos van en una sola grilla. */
+  lineas?: Linea[];
   hero: {
     chip: string;
     bajada: string;

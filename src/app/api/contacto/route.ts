@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { DOMINIO, clean, emailValido, enviarMail } from "@/lib/mail";
+import { tienePagina } from "@/lib/paginas";
 
 // Envío del formulario de /contacto. Configuración y variables de entorno en
 // src/lib/mail.ts.
@@ -28,6 +29,8 @@ type Payload = {
 };
 
 export async function POST(req: Request) {
+  // El país que no tiene el formulario tampoco recibe envíos.
+  if (!tienePagina("contacto")) return NextResponse.json({ ok: false }, { status: 404 });
   let body: Payload;
   try {
     body = (await req.json()) as Payload;

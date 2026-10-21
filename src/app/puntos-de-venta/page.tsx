@@ -12,7 +12,12 @@ export const metadata: Metadata = {
 export default function PuntosDeVentaPage({
   searchParams,
 }: {
-  searchParams?: { provincia?: string };
+  searchParams?: { provincia?: string; linea?: string };
 }) {
-  return <PuntosClient provinciaInicial={searchParams?.provincia} />;
+  return (
+    <PuntosClient
+      provinciaInicial={searchParams?.provincia}
+      lineaInicial={searchParams?.linea}
+    />
+  );
 }

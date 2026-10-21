@@ -3,6 +3,7 @@ import Link from "next/link";
 import { MapPin, Wrench, FileText } from "lucide-react";
 import Reveal from "@/components/Reveal";
 import FormularioContacto from "@/components/contacto/FormularioContacto";
+import { exigirPagina } from "@/lib/paginas";
 
 export const metadata: Metadata = {
   title: "Contacto — Blindex",
@@ -28,6 +29,7 @@ const ATAJOS = [
 ];
 
 export default function ContactoPage() {
+  exigirPagina("contacto");
   return (
     <div className="pt-28 pb-24">
       <div className="container-x">

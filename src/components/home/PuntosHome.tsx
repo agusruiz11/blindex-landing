@@ -5,7 +5,8 @@ import Link from "next/link";
 import { ArrowRight, MapPin, MessageCircle, Phone, ShieldCheck } from "lucide-react";
 import Reveal from "@/components/Reveal";
 import { puntosDeVenta } from "@pais/puntosDeVenta";
-import type { PuntoDeVenta } from "@/paises/tipos";
+import { sitio } from "@pais/sitio";
+import type { LineaId, PuntoDeVenta } from "@/paises/tipos";
 import { trackContacto, trackCta } from "@/lib/tracking";
 
 /**
@@ -25,29 +26,43 @@ const MAX_VISIBLES = 6;
 
 // Orden de las provincias: por cantidad de puntos, así las que más tienen
 // quedan primero y la fila de chips no arranca con una de un solo punto.
-function provinciasOrdenadas() {
+function provinciasOrdenadas(puntos: PuntoDeVenta[]) {
   const conteo = new Map<string, number>();
-  for (const p of puntosDeVenta) conteo.set(p.provincia, (conteo.get(p.provincia) ?? 0) + 1);
+  for (const p of puntos) conteo.set(p.provincia, (conteo.get(p.provincia) ?? 0) + 1);
   return Array.from(conteo.entries())
     .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
     .map(([provincia, cantidad]) => ({ provincia, cantidad }));
 }
 
+// Países con líneas (Paraguay): primero la línea, después la región.
+const lineas = sitio.lineas;
+const deLinea = (linea: LineaId | undefined) =>
+  lineas && linea ? puntosDeVenta.filter((p) => p.lineas?.includes(linea)) : puntosDeVenta;
+
 export default function PuntosHome() {
-  const provincias = useMemo(provinciasOrdenadas, []);
+  const [linea, setLinea] = useState<LineaId | undefined>(lineas?.[0]?.id);
+  const puntosLinea = useMemo(() => deLinea(linea), [linea]);
+  const provincias = useMemo(() => provinciasOrdenadas(puntosLinea), [puntosLinea]);
   const [provincia, setProvincia] = useState(provincias[0]?.provincia ?? "");
+
+  const cambiarLinea = (l: LineaId) => {
+    setLinea(l);
+    setProvincia(provinciasOrdenadas(deLinea(l))[0]?.provincia ?? "");
+  };
 
   const enProvincia = useMemo(
     () =>
-      puntosDeVenta
+      puntosLinea
         .filter((p) => p.provincia === provincia)
         // Select primero; dentro de cada grupo, orden alfabético.
         .sort((a, b) => Number(!!b.select) - Number(!!a.select) || a.nombre.localeCompare(b.nombre)),
-    [provincia]
+    [puntosLinea, provincia]
   );
   const visibles = enProvincia.slice(0, MAX_VISIBLES);
   const restantes = enProvincia.length - visibles.length;
-  const hrefTodos = `/puntos-de-venta?provincia=${encodeURIComponent(provincia)}`;
+  const hrefTodos =
+    `/puntos-de-venta?provincia=${encodeURIComponent(provincia)}` +
+    (lineas && linea ? `&linea=${linea}` : "");
 
   return (
     <section id="puntos-de-venta" className="section bg-white">
@@ -59,20 +74,41 @@ export default function PuntosHome() {
               Comprá Blindex cerca tuyo.
             </h2>
             <p className="mt-4 text-ink/60">
-              {puntosDeVenta.length} vidrierías y distribuidores autorizados en{" "}
-              {provincias.length} provincias. Elegí la tuya y escribiles por
-              WhatsApp.
+              {sitio.puntosBajada(puntosLinea.length, provincias.length)}
             </p>
           </div>
         </Reveal>
 
         {/* Provincias. En mobile la fila se desplaza a lo ancho; en desktop
             entra completa y se centra. */}
-        <Reveal className="mt-10">
+        {lineas && (
+          <Reveal className="mt-10">
+            <div role="tablist" aria-label="Línea" className="flex justify-center">
+              <div className="inline-flex rounded-full border border-slate-200 bg-white p-1 text-sm">
+                {lineas.map((l) => (
+                  <button
+                    key={l.id}
+                    type="button"
+                    role="tab"
+                    aria-selected={l.id === linea}
+                    onClick={() => cambiarLinea(l.id)}
+                    className={`rounded-full px-5 py-2 font-semibold transition ${
+                      l.id === linea ? "bg-ink-900 text-white shadow-md" : "text-ink/70 hover:text-ink"
+                    }`}
+                  >
+                    {l.nombre}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </Reveal>
+        )}
+
+        <Reveal className={lineas ? "mt-6" : "mt-10"}>
           <div
             className="-mx-5 flex gap-2 overflow-x-auto px-5 pb-2 sm:mx-0 sm:flex-wrap sm:justify-center sm:overflow-visible sm:px-0"
             role="tablist"
-            aria-label="Provincia"
+            aria-label={sitio.region.singular[0].toUpperCase() + sitio.region.singular.slice(1)}
           >
             {provincias.map(({ provincia: p, cantidad }) => {
               const activa = p === provincia;

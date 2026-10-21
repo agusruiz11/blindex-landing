@@ -30,6 +30,36 @@ export const sitio: Sitio = {
     { href: "/contacto", label: "Contacto" },
   ],
 
+  home: [
+    "hero",
+    "porQue",
+    "productos",
+    // Zócalo de producto destacado: pedido de Estefi (VASA) del 15/10/2026,
+    // con maqueta. Va entre la grilla de productos y Autenticidad.
+    "productoDestacado",
+    // Orden pedido por el cliente (mail del 04/09/2026): "Exigí Blindex
+    // original" va antes que "Nuestras obras". Después de mostrar QUÉ vende
+    // la marca, primero el mensaje de autenticidad y recién después la
+    // prueba de que funciona.
+    "autenticidad",
+    // Va pegada a Autenticidad a propósito: esa sección dice "exigí Blindex
+    // original" y ésta contesta dónde conseguirlo: la red exclusiva es la
+    // prueba concreta de autenticidad. Si se vuelve a mover Autenticidad,
+    // esta sección se mueve con ella.
+    "redDistribuidores",
+    // Puntos de venta debajo de los distribuidores: pedido de Blindex del
+    // 22/09/2026. La red dice quién distribuye; esto, dónde se compra.
+    "puntos",
+    "obras",
+    "elegiTuVidrio",
+    "boletines",
+    "ctaPuntos",
+  ],
+  paginas: ["contacto", "nuestrasObras", "asesoramiento", "capacitaciones", "capacitacionOnline"],
+  region: { singular: "provincia", plural: "provincias", todas: "Todas las provincias" },
+  puntosBajada: (puntos, regiones) =>
+    `${puntos} vidrierías y distribuidores autorizados en ${regiones} provincias. Elegí la tuya y escribiles por WhatsApp.`,
+
   hero: {
     chip: "Vidrio de seguridad #1 en Argentina",
     bajada:

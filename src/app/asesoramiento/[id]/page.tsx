@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 import Reveal from "@/components/Reveal";
 import { notas } from "@pais/notas";
+import { exigirPagina } from "@/lib/paginas";
 
 type Props = { params: { id: string } };
 
@@ -18,6 +19,7 @@ export function generateMetadata({ params }: Props): Metadata {
 }
 
 export default function NotaPage({ params }: Props) {
+  exigirPagina("asesoramiento");
   const nota = notas.find((n) => n.id === params.id);
   if (!nota) notFound();
 

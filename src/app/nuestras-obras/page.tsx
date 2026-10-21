@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import Reveal from "@/components/Reveal";
 import { obras } from "@pais/obras";
+import { exigirPagina } from "@/lib/paginas";
 
 export const metadata: Metadata = {
   title: "Nuestras obras — Blindex",
@@ -12,6 +13,7 @@ export const metadata: Metadata = {
 };
 
 export default function NuestrasObrasPage() {
+  exigirPagina("nuestrasObras");
   return (
     <div className="pt-28 pb-24">
       <div className="container-x">

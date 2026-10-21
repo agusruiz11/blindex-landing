@@ -5,13 +5,17 @@ import { paises } from "@pais/paises";
 import { productos } from "@pais/productos";
 import { sitio } from "@pais/sitio";
 
+// Con líneas (Paraguay) la primera columna lleva a cada línea; sin líneas,
+// a cada producto.
 const nav = [
   {
     title: "Líneas de producto",
-    items: productos.map((p) => ({
-      label: p.nombre,
-      href: `/productos/${p.id}`,
-    })),
+    items: sitio.lineas
+      ? sitio.lineas.map((l) => ({ label: l.nombre, href: `/#productos-${l.id}` }))
+      : productos.map((p) => ({
+          label: p.nombre,
+          href: `/productos/${p.id}`,
+        })),
   },
   ...sitio.footer.columnas,
 ];

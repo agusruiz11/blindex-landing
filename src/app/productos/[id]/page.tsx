@@ -26,6 +26,11 @@ export function generateMetadata({ params }: Props): Metadata {
 export default function ProductoPage({ params }: Props) {
   const producto = productos.find((p) => p.id === params.id);
   if (!producto) notFound();
+  // Las fichas y folletos del producto, si los tiene; si no, los primeros
+  // boletines generales del país.
+  const documentos =
+    producto.documentos ??
+    boletines.slice(0, 4).map((b) => ({ titulo: b.titulo, pdf: b.pdf }));
 
   return (
     <div className="pt-28 pb-24">
@@ -116,22 +121,29 @@ export default function ProductoPage({ params }: Props) {
             </div>
 
             <aside className="rounded-2xl border border-slate-200 bg-paper p-6">
-              <h2 className="h-display text-lg">Documentación técnica</h2>
-              <ul className="mt-4 space-y-2">
-                {boletines.slice(0, 4).map((b) => (
-                  <li key={b.id}>
-                    <a
-                      href={b.pdf}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-sm text-ink-600 underline-offset-4 hover:text-brand-600 hover:underline"
-                    >
-                      {b.titulo}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-              <Link href="/puntos-de-venta" className="btn-primary mt-6 w-full">
+              {documentos.length > 0 && (
+                <>
+                  <h2 className="h-display text-lg">Documentación técnica</h2>
+                  <ul className="mt-4 space-y-2">
+                    {documentos.map((b) => (
+                      <li key={b.pdf}>
+                        <a
+                          href={b.pdf}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-sm text-ink-600 underline-offset-4 hover:text-brand-600 hover:underline"
+                        >
+                          {b.titulo}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              )}
+              <Link
+                href="/puntos-de-venta"
+                className={documentos.length > 0 ? "btn-primary mt-6 w-full" : "btn-primary w-full"}
+              >
                 <MapPin className="h-4 w-4" />
                 Dónde comprarlo
               </Link>

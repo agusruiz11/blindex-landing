@@ -3,24 +3,11 @@
 import { ShieldCheck, History, BadgeCheck } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import Reveal, { RevealStagger } from "@/components/Reveal";
+import { sitio } from "@pais/sitio";
 
-const pilares = [
-  {
-    icon: ShieldCheck,
-    title: "Seguridad",
-    text: "Vidrios fabricados y certificados para proteger a las personas ante roturas e impactos, en cada ambiente del hogar y la obra.",
-  },
-  {
-    icon: History,
-    title: "Trayectoria",
-    text: "Décadas siendo la marca de vidrio de seguridad que arquitectos, instaladores y familias argentinas reconocen y eligen.",
-  },
-  {
-    icon: BadgeCheck,
-    title: "Respaldo",
-    text: "Producción propia, control de calidad en cada etapa y una red de distribuidores autorizados en todo el país.",
-  },
-];
+// Los textos dependen del país; los íconos van en el mismo orden en todos.
+const ICONOS = [ShieldCheck, History, BadgeCheck];
+const pilares = sitio.pilares.map((p, i) => ({ ...p, icon: ICONOS[i] }));
 
 export default function PorQueBlindex() {
   const reduce = useReducedMotion();

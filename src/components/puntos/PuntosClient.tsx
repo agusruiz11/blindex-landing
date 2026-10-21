@@ -3,7 +3,7 @@
 import { useMemo, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import { Search, Map as MapIcon, List, ShieldCheck } from "lucide-react";
-import { puntosDeVenta } from "@/data/puntosDeVenta";
+import { puntosDeVenta } from "@pais/puntosDeVenta";
 import CardPunto from "./CardPunto";
 
 // Leaflet no soporta SSR — se carga solo en cliente.

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Shield, Sun, Lock, Ear, Thermometer, ArrowUpRight } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import Reveal, { RevealStagger } from "@/components/Reveal";
-import { productos } from "@/data/productos";
+import { productos } from "@pais/productos";
 
 // Un ícono por línea. Los colores salen del manual de marca: Solar naranja
 // (Pantone 130), Anti-Robo azul (285) y Energy verde (369). Laminado usa la

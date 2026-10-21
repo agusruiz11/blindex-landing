@@ -1,3 +1,5 @@
+import type { VideoCapacitacion } from "../tipos";
+
 // ─────────────────────────────────────────────────────────────────────────
 // CAPACITACIÓN ONLINE — pública, ya existe en blindex.com.ar/capacitaciones/
 //
@@ -11,13 +13,6 @@
 // ⚠️ Los títulos en el sitio actual son "Blindex 1 / 2 / 3". Hay que pedirle
 // al cliente los títulos reales y una descripción de cada uno.
 // ─────────────────────────────────────────────────────────────────────────
-export type VideoCapacitacion = {
-  id: string;
-  titulo: string;
-  descripcion?: string;
-  youtubeId: string;
-};
-
 export const capacitacionOnline: VideoCapacitacion[] = [
   { id: "blindex-1", titulo: "Blindex 1", youtubeId: "qkTy8peYKrU" },
   { id: "blindex-2", titulo: "Blindex 2", youtubeId: "arzJ9zokr1I" },

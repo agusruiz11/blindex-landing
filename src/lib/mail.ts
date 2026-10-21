@@ -1,4 +1,5 @@
 import nodemailer from "nodemailer";
+import { sitio } from "@pais/sitio";
 
 // Envío de mails desde los formularios del sitio (contacto e inscripción a
 // capacitaciones). Un solo lugar para la configuración, así los route
@@ -13,15 +14,18 @@ import nodemailer from "nodemailer";
 //   SMTP_PORT      465 (SSL) o 587 (STARTTLS). Por defecto 465.
 //   SMTP_USER      usuario de la casilla (obligatoria)
 //   SMTP_PASS      clave de la casilla (obligatoria)
-//   CONTACT_TO     casilla que recibe consultas e inscripciones. Definida
-//                  por el cliente el 04/09/2026: estefania.cruz@ar.nsg.com
+//   CONTACT_TO     casilla que recibe consultas e inscripciones. Si falta,
+//                  va la del país (sitio.mailContacto).
 //   CONTACT_FROM   remitente, p. ej. "Blindex Web <web@blindex.com.ar>".
 //                  Si falta, se usa SMTP_USER.
 //
 // Sin configuración SMTP el envío falla con error explícito y el formulario
 // lo muestra: preferible a un "enviado" que no envía nada.
 
-export const MAIL_TO = process.env.CONTACT_TO ?? "estefania.cruz@ar.nsg.com";
+export const MAIL_TO = process.env.CONTACT_TO ?? sitio.mailContacto;
+
+/** Dominio sin www, para el pie de los mails: "blindex.com.ar". */
+export const DOMINIO = new URL(sitio.url).hostname.replace(/^www\./, "");
 
 /** Recorta y limpia un valor que vino del cliente. */
 export const clean = (v: unknown, max = 500) =>

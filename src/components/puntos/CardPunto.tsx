@@ -2,7 +2,7 @@
 
 import { forwardRef } from "react";
 import { MessageCircle, MapPin, Phone, Navigation, ShieldCheck, Globe, Instagram } from "lucide-react";
-import type { PuntoDeVenta } from "@/data/puntosDeVenta";
+import type { PuntoDeVenta } from "@/paises/tipos";
 import { trackContacto } from "@/lib/tracking";
 
 type Props = {

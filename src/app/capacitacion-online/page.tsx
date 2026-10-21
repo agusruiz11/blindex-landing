@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Reveal from "@/components/Reveal";
-import { capacitacionOnline } from "@/data/capacitacionOnline";
+import { capacitacionOnline } from "@pais/capacitacionOnline";
 
 // OJO: esta es la capacitación online ABIERTA, que ya existe hoy en
 // blindex.com.ar/capacitaciones/. No confundir con /capacitaciones-blindex,

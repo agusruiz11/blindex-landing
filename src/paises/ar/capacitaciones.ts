@@ -1,11 +1,6 @@
-// PLACEHOLDER — reemplazar por los cursos reales y sus video IDs (YouTube/Vimeo unlisted)
-export type ModuloCapacitacion = {
-  id: string;
-  titulo: string;
-  descripcion: string;
-  videoUrl: string;
-};
+import type { ModuloCapacitacion } from "../tipos";
 
+// PLACEHOLDER — reemplazar por los cursos reales y sus video IDs (YouTube/Vimeo unlisted)
 export const modulosCapacitacion: ModuloCapacitacion[] = [
   {
     id: "instalacion-segura",

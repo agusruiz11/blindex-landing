@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Analytics from "@/components/Analytics";
+import { sitio } from "@pais/sitio";
 
 // El manual pide Myriad Pro (Light/Regular/Bold), con Arial de alternativa
 // para digital. Source Sans 3 es la humanista open source de Adobe, misma
@@ -16,25 +17,20 @@ const sourceSans = Source_Sans_3({
   weight: ["300", "400", "600", "700"],
 });
 
-// El sitio actual no tiene meta description ni og:image: compartido por
-// WhatsApp aparece sin imagen. Para una marca que empuja el contacto por
-// WhatsApp es un autogol, así que acá queda cubierto desde el arranque.
-// TODO: reemplazar metadataBase por el dominio final antes de producción.
+// Dominio, descripciones e idioma salen del país (src/paises/<pais>/sitio.ts).
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.blindex.com.ar"),
+  metadataBase: new URL(sitio.url),
   title: {
     default: "Blindex — Seguridad en cada vidrio",
     template: "%s",
   },
-  description:
-    "Blindex, la marca de vidrio de seguridad en la que Argentina confía. Laminado, control solar, antirrobo, acústico y DVH, con la trayectoria de Vidriería Argentina S.A.",
+  description: sitio.descripcion,
   openGraph: {
     type: "website",
-    locale: "es_AR",
+    locale: sitio.locale,
     siteName: "Blindex",
     title: "Blindex — Seguridad en cada vidrio",
-    description:
-      "La marca de vidrio de seguridad en la que Argentina confía. Está en el Congreso de la Nación, en Ezeiza y en más de 25 obras emblemáticas.",
+    description: sitio.descripcionCompartir,
     // TODO: reemplazar por la pieza que defina la marca (1200×630).
     images: ["/img/og/blindex-og.jpg"],
   },
@@ -66,7 +62,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="es-AR" className={sourceSans.variable}>
+    <html lang={sitio.idioma} className={sourceSans.variable}>
       <body className="min-h-screen bg-white text-ink antialiased">
         <Navbar />
         <main>{children}</main>

@@ -3,10 +3,8 @@
 import Image from "next/image";
 import { useReducedMotion } from "framer-motion";
 import Reveal from "@/components/Reveal";
-import {
-  distribuidoresExclusivos,
-  type DistribuidorExclusivo,
-} from "@/data/distribuidoresExclusivos";
+import { distribuidoresExclusivos } from "@pais/distribuidoresExclusivos";
+import type { DistribuidorExclusivo } from "@/paises/tipos";
 
 /**
  * Franja de la red de distribuidores exclusivos. Es el equivalente Blindex de

@@ -11,7 +11,7 @@ import Reveal from "@/components/Reveal";
 // ejemplo y un formulario de inscripción que funcionaba.
 //
 // Para reactivarla, volver a la versión anterior de este archivo (git log):
-// los módulos están en data/capacitaciones.ts y los componentes
+// los módulos están en src/paises/<pais>/capacitaciones.ts y los componentes
 // ModuloVideo y FormularioInscripcion siguen en components/capacitaciones/.
 export const metadata: Metadata = {
   title: "Capacitación Blindex para vidrieros",

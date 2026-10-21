@@ -1,3 +1,5 @@
+import type { Producto } from "../tipos";
+
 // ─────────────────────────────────────────────────────────────────────────
 // LÍNEAS DE PRODUCTO — copy real de blindex.com.ar/product/* (31/07/2026)
 //
@@ -8,31 +10,6 @@
 // Laminado usa la marca madre y su claim "Seguridad para tu hogar".
 // Acústico no figura en el manual — falta su lockup y su color oficial.
 // ─────────────────────────────────────────────────────────────────────────
-export type Producto = {
-  id: string;
-  nombre: string;
-  /** Una línea para las cards de la home. */
-  claim: string;
-  descripcion: string;
-  beneficios: string[];
-  /** Color de la línea según el manual. Laminado usa la marca madre. */
-  acento?: "solar" | "acustico" | "antirrobo" | "energy";
-  /** Lockup oficial de la sub-marca, extraído de los .ai del manual. */
-  logo?: string;
-  /**
-   * Altura del lockup en pantalla. No es la misma para todos: Solar, Anti|Robo
-   * y Energy traen el claim en una segunda línea, y Acústico no. A igual
-   * altura total, el "BLINDEX" de Acústico saldría al doble de tamaño, así que
-   * va a la mitad para que el cuadrado rojo mida lo mismo en los cuatro.
-   */
-  logoClase?: string;
-  /** El claim propio de cada línea, según el manual. */
-  claimMarca?: string;
-  /** Videos de producto ya publicados en el sitio actual. */
-  video?: { src: string; titulo: string }[];
-  urlActual: string;
-};
-
 // Ya descargados y recomprimidos en /public/video (52 MB → 16 MB).
 const V = "/video";
 

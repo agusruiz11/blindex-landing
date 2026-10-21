@@ -5,7 +5,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import Reveal, { RevealStagger } from "@/components/Reveal";
-import { obrasDestacadas, obras } from "@/data/obras";
+import { obrasDestacadas, obras } from "@pais/obras";
 
 export default function Obras() {
   const reduce = useReducedMotion();

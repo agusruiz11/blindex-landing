@@ -6,17 +6,10 @@ import { useEffect, useState } from "react";
 import { Menu, X, MapPin } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import BlindexLogo from "@/components/BlindexLogo";
+import { sitio } from "@pais/sitio";
 
-// El sitio actual expone sólo 4 páginas de 91 en el menú: Obras, Asesoramiento
-// y Contacto están publicadas pero son inalcanzables navegando. Sacarlas a la
-// superficie es el objetivo central del refresh.
-const links = [
-  { href: "/#productos", label: "Productos" },
-  { href: "/nuestras-obras", label: "Obras" },
-  { href: "/#elegi-tu-vidrio", label: "Elegí tu vidrio" },
-  { href: "/asesoramiento", label: "Asesoramiento" },
-  { href: "/contacto", label: "Contacto" },
-];
+// Los links del menú dependen del país: no todos tienen las mismas páginas.
+const links = sitio.menu;
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);

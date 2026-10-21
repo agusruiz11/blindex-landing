@@ -5,8 +5,8 @@ import { notFound } from "next/navigation";
 import { ArrowLeft, Check, MapPin } from "lucide-react";
 import Reveal from "@/components/Reveal";
 import BlindexLogo from "@/components/BlindexLogo";
-import { productos } from "@/data/productos";
-import { boletines } from "@/data/boletines";
+import { productos } from "@pais/productos";
+import { boletines } from "@pais/boletines";
 
 type Props = { params: { id: string } };
 

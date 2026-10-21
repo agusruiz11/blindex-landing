@@ -1,3 +1,5 @@
+import type { DistribuidorExclusivo } from "../tipos";
+
 // ─────────────────────────────────────────────────────────────────────────
 // RED DE DISTRIBUIDORES EXCLUSIVOS BLINDEX
 //
@@ -52,18 +54,6 @@
 //  · "STA Sistemas Tecnológicos Aplicados": se muestra abreviado "STA"
 //    porque el nombre completo no entra en la ficha.
 // ─────────────────────────────────────────────────────────────────────────
-export type DistribuidorExclusivo = {
-  id: string;
-  /** Nombre comercial, para mostrar. */
-  nombre: string;
-  /** Razón social textual como la mandó el cliente. No editar. */
-  razonSocial: string;
-  /** Ruta en /public/logos/distribuidores. Sin esto, se muestra el nombre. */
-  logo?: string;
-  /** Sitio web o perfil de Instagram (URL completa). Sin esto, la ficha no linkea. */
-  web?: string;
-};
-
 export const distribuidoresExclusivos: DistribuidorExclusivo[] = [
   { id: "aberturas-sur", nombre: "Aberturas Sur", razonSocial: "ABERTURAS SUR S.R.L", web: "https://www.instagram.com/cristales_del_sur_/" },
   { id: "ar-pugliese", nombre: "A.R. Pugliese y Cía.", razonSocial: "A.R.PUGLIESE Y CIA S.EN C", web: "https://www.rodolfopugliese.com/" },

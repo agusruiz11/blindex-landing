@@ -1,5 +1,5 @@
 import { PlayCircle } from "lucide-react";
-import type { ModuloCapacitacion } from "@/data/capacitaciones";
+import type { ModuloCapacitacion } from "@/paises/tipos";
 import Reveal from "@/components/Reveal";
 
 export default function ModuloVideo({

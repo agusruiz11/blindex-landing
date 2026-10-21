@@ -4,7 +4,8 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import { ArrowRight, MapPin, MessageCircle, Phone, ShieldCheck } from "lucide-react";
 import Reveal from "@/components/Reveal";
-import { puntosDeVenta, type PuntoDeVenta } from "@/data/puntosDeVenta";
+import { puntosDeVenta } from "@pais/puntosDeVenta";
+import type { PuntoDeVenta } from "@/paises/tipos";
 import { trackContacto, trackCta } from "@/lib/tracking";
 
 /**

@@ -1,3 +1,5 @@
+import type { Nota } from "../tipos";
+
 // ─────────────────────────────────────────────────────────────────────────
 // NOTAS TÉCNICAS — texto real volcado de blindex.com.ar/notes/ (31/07/2026)
 //
@@ -8,13 +10,6 @@
 // responsabilidad profesional). Vale como contenido SEO para arquitectos y
 // especificadores, que es la audiencia B2B de la marca.
 // ─────────────────────────────────────────────────────────────────────────
-export type Nota = {
-  id: string;
-  titulo: string;
-  resumen: string;
-  parrafos: string[];
-};
-
 export const notas: Nota[] = [
   {
     id: "seguridad-de-las-personas-y-seguridad-de-los-bienes",

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 import Reveal from "@/components/Reveal";
-import { notas } from "@/data/notas";
+import { notas } from "@pais/notas";
 
 type Props = { params: { id: string } };
 

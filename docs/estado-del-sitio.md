@@ -31,7 +31,7 @@ Orden real de las secciones en [page.tsx](../src/app/page.tsx):
 | 9 | CTA a puntos de venta | `home/CtaPuntos.tsx` | ok |
 
 **Red de distribuidores exclusivos.** Los 32 nombres están cargados en
-[distribuidoresExclusivos.ts](../src/data/distribuidoresExclusivos.ts) y desde
+[distribuidoresExclusivos.ts](../src/paises/ar/distribuidoresExclusivos.ts) y desde
 el 23/09 los 32 tienen link, todos verificados. El 07/09 entraron 24 webs de
 la planilla "Blindex webs.xlsx"; el 22/09 Blindex mandó las cinco que faltaban
 (Baleno, Infissi, JMG, RM Obras Civiles, STA) y aprobó linkear a Instagram a
@@ -71,7 +71,7 @@ link directo a WhatsApp por sucursal.
 **Excel verificado importado el 23/09.** La planilla del cliente está en
 [assets-fuente/pdv-blindex-2026-09-22.xlsx](../assets-fuente/pdv-blindex-2026-09-22.xlsx)
 (117 filas con WhatsApp, Instagram, web, dirección y teléfono). Resultado en
-[puntosDeVenta.ts](../src/data/puntosDeVenta.ts): **110 puntos**, 106 con
+[puntosDeVenta.ts](../src/paises/ar/puntosDeVenta.ts): **110 puntos**, 106 con
 WhatsApp, 94 con Instagram, 78 con web, 24 Select. El detalle completo de la
 importación está en el encabezado de ese archivo. Resumen:
 
@@ -114,7 +114,7 @@ de entorno que contacto.
 El contenido sigue siendo placeholder: dos módulos inventados con un video
 dummy y cuatro preguntas de ejemplo. Cuando Ine y Estefanía definan los
 módulos, temas y cuestionarios reales, cambian
-[capacitaciones.ts](../src/data/capacitaciones.ts) y las `preguntas` del
+[capacitaciones.ts](../src/paises/ar/capacitaciones.ts) y las `preguntas` del
 formulario; el envío no se toca.
 
 Falta del cliente: autorización de CAVIPLAN para usar sus videos · cuántos
@@ -139,7 +139,7 @@ Copiada tal cual, la herramienta se ve como el sitio viejo. Restilarla es un
 
 ### Redes sociales
 
-Cargadas el 07/09 en [socials.ts](../src/data/socials.ts): Instagram
+Cargadas el 07/09 en [socials.ts](../src/paises/ar/socials.ts): Instagram
 (`@blindex_intl`), Facebook (`Blindex.intl`) y YouTube (canal oficial), las
 mismas que linkea el sitio actual. Blindex no tiene LinkedIn propio, así que el
 ícono se sacó; la empresa madre (Vidriería Argentina S.A.) sí tiene página y se

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { clean, emailValido, enviarMail } from "@/lib/mail";
+import { DOMINIO, clean, emailValido, enviarMail } from "@/lib/mail";
 
 // Envío del formulario de /contacto. Configuración y variables de entorno en
 // src/lib/mail.ts.
@@ -66,7 +66,7 @@ export async function POST(req: Request) {
     "Mensaje:",
     mensaje,
     "",
-    "Enviado desde el formulario de contacto de blindex.com.ar",
+    `Enviado desde el formulario de contacto de ${DOMINIO}`,
   ].filter((l): l is string => typeof l === "string");
 
   const r = await enviarMail({

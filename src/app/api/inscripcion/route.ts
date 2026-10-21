@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { clean, emailValido, enviarMail } from "@/lib/mail";
+import { DOMINIO, clean, emailValido, enviarMail } from "@/lib/mail";
 
 // Envío del formulario de inscripción de /capacitaciones-blindex.
 // Configuración y variables de entorno en src/lib/mail.ts.
@@ -8,7 +8,7 @@ import { clean, emailValido, enviarMail } from "@/lib/mail";
 // con los datos y las respuestas del cuestionario. No hay autocorrección ni
 // certificado automático: la marca revisa y emite el certificado a mano.
 // Cuando Ine y Estefanía definan los módulos y preguntas reales, este handler
-// no cambia; sólo cambia `src/data/capacitaciones.ts` y el cuestionario.
+// no cambia; sólo cambia `src/paises/<pais>/capacitaciones.ts` y el cuestionario.
 
 export const runtime = "nodejs";
 
@@ -76,7 +76,7 @@ export async function POST(req: Request) {
     "Cuestionario:",
     ...respuestas.flatMap(([p, r], i) => [`${i + 1}. ${p}`, `   Respuesta: ${r}`]),
     "",
-    "Enviado desde el formulario de inscripción a capacitaciones de blindex.com.ar",
+    `Enviado desde el formulario de inscripción a capacitaciones de ${DOMINIO}`,
   ];
 
   const r = await enviarMail({

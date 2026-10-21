@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { trackCta } from "@/lib/tracking";
+import { sitio } from "@pais/sitio";
 import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { MapPin, ShieldCheck, ArrowRight } from "lucide-react";
 
@@ -96,7 +97,7 @@ export default function Hero() {
         >
           <motion.span variants={item} className="chip border-white/20 bg-white/10 text-white">
             <ShieldCheck className="h-3.5 w-3.5" />
-            Vidrio de seguridad #1 en Argentina
+            {sitio.hero.chip}
           </motion.span>
 
           <motion.h1
@@ -109,9 +110,7 @@ export default function Hero() {
           </motion.h1>
 
           <motion.p variants={item} className="mt-6 max-w-xl text-lg text-white/80 sm:text-xl">
-            Blindex es la marca de vidrio de seguridad en la que Argentina
-            confía hace décadas. Está en el Congreso de la Nación, en Ezeiza y
-            en más de 25 obras emblemáticas del país.
+            {sitio.hero.bajada}
           </motion.p>
 
           <motion.div variants={item} className="mt-10 flex flex-col gap-3 sm:flex-row">
@@ -119,8 +118,12 @@ export default function Hero() {
               <MapPin className="h-4 w-4" />
               Encontrá tu punto de venta
             </Link>
-            <Link href="/#elegi-tu-vidrio" className="btn-ghost" onClick={() => trackCta("hero_elegi_tu_vidrio")}>
-              Elegí tu vidrio
+            <Link
+              href={sitio.hero.ctaSecundario.href}
+              className="btn-ghost"
+              onClick={() => trackCta(sitio.hero.ctaSecundario.evento)}
+            >
+              {sitio.hero.ctaSecundario.label}
               <ArrowRight className="h-4 w-4" />
             </Link>
           </motion.div>

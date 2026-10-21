@@ -4,7 +4,7 @@ import Link from "next/link";
 import { FileText, Download, ArrowRight } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import Reveal, { RevealStagger } from "@/components/Reveal";
-import { boletines } from "@/data/boletines";
+import { boletines } from "@pais/boletines";
 
 export default function Boletines() {
   const reduce = useReducedMotion();

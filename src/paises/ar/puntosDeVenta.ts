@@ -1,3 +1,5 @@
+import type { PuntoDeVenta } from "../tipos";
+
 // ─────────────────────────────────────────────────────────────────────────
 // RED DE PUNTOS DE VENTA — data real
 //
@@ -39,24 +41,6 @@
 //   { id: "milton-montero", nombre: "Milton Montero", direccion: "rawson 2951", localidad: "Buenos Aires", provincia: "Buenos Aires", lat: -38.005728, lng: -57.556918, telefono: "(0223) 4422018" },
 //   { id: "casa-segat-saic", nombre: "Casa Segat SAIC", direccion: "Chile 2556/64", localidad: "CABA", provincia: "CABA", lat: -34.617706, lng: -58.401783 },
 // ─────────────────────────────────────────────────────────────────────────
-export type PuntoDeVenta = {
-  id: string;
-  nombre: string;
-  direccion: string;
-  localidad: string;
-  provincia: string;
-  lat: number;
-  lng: number;
-  /** Formato wa.me: sólo dígitos, con país (549...), sin + ni espacios. */
-  whatsapp?: string;
-  telefono?: string;
-  web?: string;
-  /** Usuario de Instagram, sin @. */
-  instagram?: string;
-  /** "Punto de venta Select" — la red recomendada por la marca. */
-  select?: boolean;
-};
-
 export const puntosDeVenta: PuntoDeVenta[] = [
   { id: "aberdesign", nombre: "Aberdesign", direccion: "Av. Lacaze 4462", localidad: "Claypole", provincia: "Buenos Aires", lat: -34.804738, lng: -58.336338, whatsapp: "5491158026193", telefono: "0291-4528/4538", web: "https://www.aberdesign.com.ar/", instagram: "aberdesign", select: true },
   { id: "central-de-vidrios", nombre: "Central De Vidrios", direccion: "Av. Pres. Arturo Illia 2447", localidad: "San Martín", provincia: "Buenos Aires", lat: -34.571811, lng: -58.523761, whatsapp: "5491531857510", telefono: "1121009051", instagram: "central_de_vidrios", select: true },

@@ -75,8 +75,8 @@ Tipografía: en las piezas se ve una grotesca humanista tipo Open Sans / Source 
 - [ ] **Metadata por foto**: qué obra es, dónde queda, qué producto Blindex lleva. Sin esto los epígrafes los inventamos nosotros.
 
 ### Datos operativos
-- [ ] **Puntos de venta actualizados** (hay un [dataset](../src/data/puntosDeVenta.ts) que hay que validar): nombre, dirección, coordenadas, tel, horario.
-- [ ] **Contacto oficial**: WhatsApp, mail, redes ([socials.ts](../src/data/socials.ts)).
+- [ ] **Puntos de venta actualizados** (hay un [dataset](../src/paises/ar/puntosDeVenta.ts) que hay que validar): nombre, dirección, coordenadas, tel, horario.
+- [ ] **Contacto oficial**: WhatsApp, mail, redes ([socials.ts](../src/paises/ar/socials.ts)).
 - [ ] **Destino de los leads** del formulario de capacitaciones: ¿mail, CRM, HubSpot?
 - [ ] **Dominio, hosting y analytics** (GA4 / Meta Pixel / GTM).
 - [ ] **Sitemap aprobado** — confirmar que Home + Puntos de Venta + Capacitaciones es el alcance.

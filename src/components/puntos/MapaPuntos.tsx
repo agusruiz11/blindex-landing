@@ -4,7 +4,7 @@ import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { useEffect, useRef } from "react";
-import type { PuntoDeVenta } from "@/data/puntosDeVenta";
+import type { PuntoDeVenta } from "@/paises/tipos";
 import { trackContacto } from "@/lib/tracking";
 
 // Fix bug clásico de íconos de marker en bundlers modernos (Next.js).

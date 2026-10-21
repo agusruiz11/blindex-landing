@@ -4,6 +4,7 @@
 #
 # Uso, desde la raíz del repo:  npm run empaquetar
 # Resultado:                     entrega/<sitio>-AAAAMMDD.zip
+# Otro país:                     PAIS=py npm run empaquetar
 #
 # Antes de correrlo:
 #  · Node de la misma versión mayor que el servidor (hoy 20). Lo avisa abajo.
@@ -21,7 +22,12 @@ if [ "$NODE_LOCAL" != "$NODE_SERVIDOR" ]; then
   [ "$r" = "s" ] || exit 1
 fi
 
+# País: PAIS=py npm run empaquetar arma entrega/<sitio>-py-AAAAMMDD.zip. Sin
+# PAIS (o con PAIS=ar) es Argentina y el nombre queda como siempre.
 SITIO="$(node -p "require('./package.json').name")"
+if [ -n "${PAIS:-}" ] && [ "$PAIS" != "ar" ]; then
+  SITIO="$SITIO-$PAIS"
+fi
 FECHA="$(date +%Y%m%d)"
 DESTINO="entrega/$SITIO"
 

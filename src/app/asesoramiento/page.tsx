@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { FileDown, ArrowRight, Scale } from "lucide-react";
 import Reveal from "@/components/Reveal";
-import { boletines } from "@/data/boletines";
-import { notas } from "@/data/notas";
+import { boletines } from "@pais/boletines";
+import { notas } from "@pais/notas";
 
 export const metadata: Metadata = {
   title: "Asesoramiento técnico y legal — Blindex",

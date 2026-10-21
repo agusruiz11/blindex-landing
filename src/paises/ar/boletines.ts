@@ -1,3 +1,5 @@
+import type { Boletin } from "../tipos";
+
 // ─────────────────────────────────────────────────────────────────────────
 // BOLETINES TÉCNICOS — data real de blindex.com.ar/asesoramiento/
 //
@@ -5,19 +7,13 @@
 // viejo. En el sitio actual /boletines/ y /asesoramiento/ son la MISMA página
 // duplicada; acá quedan unificadas.
 //
-// El texto de las notas técnicas vive en data/notas.ts, ya volcado.
+// El texto de las notas técnicas vive en notas.ts (misma carpeta), ya volcado.
 //
 // ⚠️ Un PDF del sitio actual está roto en producción: el link a
 // "Blindex, Blindex Solar y Blindex Antirrobo"
 // (wp-content/uploads/2017/06/Blindex.Junio17_altaOUT2con_Energy.pdf)
 // devuelve 404. Queda fuera hasta que el cliente lo reponga.
 // ─────────────────────────────────────────────────────────────────────────
-export type Boletin = {
-  id: string;
-  titulo: string;
-  pdf: string;
-};
-
 const DOCS = "/docs";
 
 export const boletines: Boletin[] = [

@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import Reveal from "@/components/Reveal";
-import { obras } from "@/data/obras";
+import { obras } from "@pais/obras";
 
 export const metadata: Metadata = {
   title: "Nuestras obras — Blindex",

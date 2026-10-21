@@ -4,6 +4,7 @@ import Link from "next/link";
 import { trackCta } from "@/lib/tracking";
 import { MapPin, ArrowRight } from "lucide-react";
 import Reveal from "@/components/Reveal";
+import { sitio } from "@pais/sitio";
 
 export default function CtaPuntos() {
   return (
@@ -27,9 +28,7 @@ export default function CtaPuntos() {
                   Encontrá tu punto de venta Blindex.
                 </h2>
                 <p className="mt-2 max-w-lg text-ink/65">
-                  Distribuidores autorizados en Argentina, Bolivia, Paraguay
-                  y Uruguay, listos para asesorarte y garantizar el vidrio
-                  original.
+                  {sitio.ctaPuntos}
                 </p>
               </div>
             </div>

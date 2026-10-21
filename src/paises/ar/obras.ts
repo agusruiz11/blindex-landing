@@ -1,3 +1,5 @@
+import type { Obra } from "../tipos";
+
 // ─────────────────────────────────────────────────────────────────────────
 // OBRAS — data real de blindex.com.ar/nuestras-obras/ (relevado 31/07/2026)
 //
@@ -12,14 +14,6 @@
 // arquitectura. Está pedido al cliente junto con los créditos de fotografía.
 // `destacada` es criterio nuestro para la home, no del cliente.
 // ─────────────────────────────────────────────────────────────────────────
-export type Obra = {
-  id: string;
-  nombre: string;
-  img: string;
-  /** Se muestra en la home. El resto vive en /nuestras-obras. */
-  destacada?: boolean;
-};
-
 const BASE = "/img/obras";
 
 export const obras: Obra[] = [

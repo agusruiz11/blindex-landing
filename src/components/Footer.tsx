@@ -1,8 +1,9 @@
 import Link from "next/link";
 import BlindexLogo from "@/components/BlindexLogo";
-import { socials } from "@/data/socials";
-import { paises } from "@/data/paises";
-import { productos } from "@/data/productos";
+import { socials } from "@pais/socials";
+import { paises } from "@pais/paises";
+import { productos } from "@pais/productos";
+import { sitio } from "@pais/sitio";
 
 const nav = [
   {
@@ -12,24 +13,7 @@ const nav = [
       href: `/productos/${p.id}`,
     })),
   },
-  {
-    title: "Blindex",
-    items: [
-      { label: "¿Por qué Blindex?", href: "/#por-que-blindex" },
-      { label: "Exigí Blindex original", href: "/#autenticidad" },
-      { label: "Nuestras obras", href: "/nuestras-obras" },
-      { label: "Contacto", href: "/contacto" },
-    ],
-  },
-  {
-    title: "Recursos",
-    items: [
-      { label: "Elegí tu vidrio", href: "/#elegi-tu-vidrio" },
-      { label: "Asesoramiento técnico", href: "/asesoramiento" },
-      { label: "Capacitación online", href: "/capacitacion-online" },
-      { label: "Puntos de venta", href: "/puntos-de-venta" },
-    ],
-  },
+  ...sitio.footer.columnas,
 ];
 
 export default function Footer() {
@@ -42,9 +26,7 @@ export default function Footer() {
               <BlindexLogo light className="h-12 w-auto sm:h-14" />
             </Link>
             <p className="mt-4 max-w-xs text-sm text-white/60">
-              Vidrio de seguridad con la trayectoria y el respaldo que
-              Argentina conoce. Cuando protegés a tu familia, no hay lugar
-              para atajos.
+              {sitio.footer.bajada}
             </p>
 
             <div className="mt-6 flex items-center gap-3">
@@ -111,8 +93,7 @@ export default function Footer() {
 
         <div className="mt-6 border-t border-white/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-xs text-white/45">
-            Blindex es marca registrada de Vidriería Argentina S.A. — Todos
-            los derechos reservados.
+            {sitio.footer.legal}
           </p>
           <p className="text-xs text-white/45">
             © {new Date().getFullYear()} Blindex. Hecho por{" "}

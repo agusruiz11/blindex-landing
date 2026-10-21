@@ -33,3 +33,6 @@ next-env.d.ts
 # JPG en alta, videos). NO se versiona ni se deploya: de acá salen los
 # derivados optimizados que sí van a public/. Backup en el Drive del proyecto.
 /assets-fuente
+
+# paquetes para RH Studio (scripts/empaquetar.sh)
+/entrega

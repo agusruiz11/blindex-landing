@@ -1,24 +1,27 @@
-import { Resend } from "resend";
+import nodemailer from "nodemailer";
 
 // Envío de mails desde los formularios del sitio (contacto e inscripción a
-// capacitaciones). Un solo lugar para la configuración, así los dos route
+// capacitaciones). Un solo lugar para la configuración, así los route
 // handlers comparten variables de entorno y manejo de errores.
 //
-// Variables (Vercel → Settings → Environment Variables, y .env local; ver
-// .env.example):
-//   RESEND_API_KEY   clave de Resend (obligatoria)
-//   CONTACT_TO       casilla que recibe consultas e inscripciones. Definida
-//                    por el cliente el 04/09/2026: estefania.cruz@ar.nsg.com
-//   CONTACT_FROM     remitente. Tiene que ser de un dominio verificado en
-//                    Resend: "Blindex Web <web@posicionarte.online>" hasta que
-//                    se verifique blindex.com.ar.
+// 21/10/2026: pasa de Resend al SMTP del servidor donde se aloja el sitio
+// (RH Studio). Las credenciales las cargan ellos como variables de entorno
+// en el cPanel; no viajan por el repo ni por nosotros.
 //
-// Sin RESEND_API_KEY el envío falla con error explícito y el formulario lo
-// muestra: preferible a un "enviado" que no envía nada.
+// Variables (ver .env.example):
+//   SMTP_HOST      servidor SMTP (obligatoria)
+//   SMTP_PORT      465 (SSL) o 587 (STARTTLS). Por defecto 465.
+//   SMTP_USER      usuario de la casilla (obligatoria)
+//   SMTP_PASS      clave de la casilla (obligatoria)
+//   CONTACT_TO     casilla que recibe consultas e inscripciones. Definida
+//                  por el cliente el 04/09/2026: estefania.cruz@ar.nsg.com
+//   CONTACT_FROM   remitente, p. ej. "Blindex Web <web@blindex.com.ar>".
+//                  Si falta, se usa SMTP_USER.
+//
+// Sin configuración SMTP el envío falla con error explícito y el formulario
+// lo muestra: preferible a un "enviado" que no envía nada.
 
 export const MAIL_TO = process.env.CONTACT_TO ?? "estefania.cruz@ar.nsg.com";
-export const MAIL_FROM =
-  process.env.CONTACT_FROM ?? "Blindex Web <onboarding@resend.dev>";
 
 /** Recorta y limpia un valor que vino del cliente. */
 export const clean = (v: unknown, max = 500) =>
@@ -33,33 +36,50 @@ type Envio = {
   replyTo?: string;
 };
 
+let transporte: nodemailer.Transporter | null = null;
+
+function getTransporte() {
+  const { SMTP_HOST, SMTP_USER, SMTP_PASS } = process.env;
+  if (!SMTP_HOST || !SMTP_USER || !SMTP_PASS) return null;
+  if (!transporte) {
+    const port = Number(process.env.SMTP_PORT ?? 465);
+    transporte = nodemailer.createTransport({
+      host: SMTP_HOST,
+      port,
+      // 465 es SSL directo; 587 arranca en claro y sube a TLS (STARTTLS).
+      secure: port === 465,
+      auth: { user: SMTP_USER, pass: SMTP_PASS },
+    });
+  }
+  return transporte;
+}
+
 /**
  * Envía un mail a la casilla de la marca. Devuelve `{ ok: true }` o
  * `{ ok: false, error, status }` listo para responder desde el route handler.
  */
 export async function enviarMail({ subject, text, replyTo }: Envio) {
-  if (!process.env.RESEND_API_KEY) {
-    console.error("[mail] Falta RESEND_API_KEY");
+  const t = getTransporte();
+  if (!t) {
+    console.error("[mail] Falta configuración SMTP (SMTP_HOST, SMTP_USER, SMTP_PASS)");
     return { ok: false as const, error: "El envío no está configurado.", status: 500 };
   }
 
-  const resend = new Resend(process.env.RESEND_API_KEY);
-  const { error } = await resend.emails.send({
-    from: MAIL_FROM,
-    to: [MAIL_TO],
-    replyTo,
-    subject,
-    text,
-  });
-
-  if (error) {
-    console.error("[mail] Resend:", error);
+  try {
+    await t.sendMail({
+      from: process.env.CONTACT_FROM ?? process.env.SMTP_USER,
+      to: MAIL_TO,
+      replyTo,
+      subject,
+      text,
+    });
+    return { ok: true as const };
+  } catch (err) {
+    console.error("[mail] SMTP:", err);
     return {
       ok: false as const,
       error: "No pudimos enviar el mensaje. Probá de nuevo en unos minutos.",
       status: 502,
     };
   }
-
-  return { ok: true as const };
 }
